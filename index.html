@@ -2,60 +2,80 @@
 <html>
 <head>
     <title>Namit Shastry</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0d0d0d;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 60px;
+            font-size: 48px;
+            color: #f5c542;
+        }
+
+        p {
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 200px);
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background: #2a2a2a;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
 <body>
 
     <h1>Namit Shastry</h1>
+    <p>Research • Chess • Engineering • Writing</p>
 
-    <p>
-        Researcher • Chess Analyst • Future Civil Engineer
-    </p>
+    <div class="grid">
 
-    <hr>
+        <a href="#">
+            <div class="card">Research</div>
+        </a>
 
-    <h2>Navigation</h2>
+        <a href="#">
+            <div class="card">Chess</div>
+        </a>
 
-    <ul>
-        <li>About</li>
-        <li>Research</li>
-        <li>Chess</li>
-        <li>Articles</li>
-        <li>Achievements</li>
-        <li>Contact</li>
-    </ul>
+        <a href="#">
+            <div class="card">Articles</div>
+        </a>
 
-    <hr>
+        <a href="achievements/aalekh-award.html">
+            <div class="card">Achievements</div>
+        </a>
 
-    <h2>About Me</h2>
-
-    <p>
-        Welcome to my personal website.
-        This website documents my work in research,
-        chess, engineering, problem solving and learning.
-    </p>
-
-    <h2>Featured Areas</h2>
-
-    <h3>Research</h3>
-    <p>
-        Research projects, technical papers and engineering investigations.
-    </p>
-
-    <h3>Chess</h3>
-    <p>
-        Opening preparation, game analysis and chess improvement.
-    </p>
-
-    <h3>Articles</h3>
-    <p>
-        Articles on engineering, business, economics and education.
-    </p>
-
-    <h3>Achievements</h3>
-    <p>
-        Competitions, awards, olympiads and milestones.
-    </p>
+    </div>
 
 </body>
 </html>
