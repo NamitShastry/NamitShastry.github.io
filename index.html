@@ -1,97 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        /* ===== CANOPY CANVAS THEME ===== */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
-            text-align: center;
+            padding: 0;
         }
 
+        body {
+            background-color: #0e171e;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Wave Shapes matching Aalekh Page */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.35) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%;
+            filter: blur(60px);
+            animation: wave-movement 22s infinite alternate ease-in-out;
+        }
+
+        /* ===== NAVIGATION HEADER ===== */
         .nav {
-            background: #111;
-            padding: 15px;
+            background: rgba(17, 17, 17, 0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .nav a {
-            color: white;
-            margin: 0 15px;
+            color: #dae5e6;
+            margin: 0 20px;
             text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
         }
 
         .nav a:hover {
-            color: #f5c542;
+            color: #8dbdc1;
         }
 
+        /* ===== HERO ARCHITECTURE ===== */
         h1 {
-            margin-top: 50px;
-            color: #f5c542;
+            font-family: 'Playfair Display', serif;
+            font-size: 54px;
+            margin-top: 100px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        p {
-            color: #aaa;
+        .subtitle {
+            color: #8dbdc1;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-bottom: 60px;
         }
 
+        /* ===== INTERACTIVE GRID ===== */
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 200px);
-            gap: 20px;
+            grid-template-columns: repeat(2, 240px);
+            gap: 25px;
             justify-content: center;
             margin-top: 40px;
+            padding: 0 20px;
         }
 
-        .card {
-            background: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            background: #2a2a2a;
-        }
-
-        a {
+        .grid-link {
             text-decoration: none;
             color: white;
         }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(141, 189, 193, 0.08);
+            padding: 35px 25px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .grid-link:hover .card {
+            transform: translateY(-5px);
+            background: rgba(141, 189, 193, 0.05);
+            border-color: rgba(141, 189, 193, 0.3);
+            box-shadow: 0 20px 40px rgba(78, 142, 147, 0.15);
+        }
+
+        @keyframes wave-movement {
+            0% { border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%; transform: translate(0, 0) rotate(0deg); }
+            100% { border-radius: 40% 60% 50% 50% / 40% 45% 55% 60%; transform: translate(20px, -20px) rotate(60deg); }
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; width: 100%; max-width: 280px; margin: 40px auto 0; }
+            h1 { font-size: 38px; margin-top: 60px; }
+        }
     </style>
 </head>
-
 <body>
 
+<div class="bg-blobs"></div>
+
 <div class="nav">
-    <a href="/index.html">Home</a>
-    <a href="/research.html">Research</a>
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
     <a href="#">Chess</a>
     <a href="#">Articles</a>
-    <a href="/achievements/aalekh-award.html">Achievements</a>
+    <a href="achievements/achievements.html">Achievements</a>
     <a href="#">Contact</a>
 </div>
 
 <h1>Namit Shastry</h1>
-<p>Research • Chess • Engineering • Writing</p>
+<div class="subtitle">Research • Chess • Engineering • Writing</div>
 
 <div class="grid">
 
-    <a href="/research.html">
+    <a href="research.html" class="grid-link">
         <div class="card">Research</div>
     </a>
 
-    <a href="#">
+    <a href="#" class="grid-link">
         <div class="card">Chess</div>
     </a>
 
-    <a href="#">
+    <a href="#" class="grid-link">
         <div class="card">Articles</div>
     </a>
 
-    <a href="/achievements/aalekh-award.html">
+    <a href="achievements/achievements.html" class="grid-link">
         <div class="card">Achievements</div>
     </a>
 
