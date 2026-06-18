@@ -1,0 +1,225 @@
+<style>
+    /* ===== CORE BRAND PRESETS ===== */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background-color: #0e171e;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        line-height: 1.8;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+
+    /* ===== AMBIENT BACKDROP ===== */
+    .bg-blobs {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+    }
+
+    .bg-blobs::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        right: -10%;
+        width: 70vw;
+        height: 70vw;
+        background: radial-gradient(circle, rgba(78, 142, 147, 0.45) 0%, rgba(39, 76, 85, 0) 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+    }
+
+    /* ===== STRUCTURAL CONTAINER ===== */
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 60px 40px 100px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
+    .back-button-wrapper {
+        position: absolute;
+        top: 60px;
+        left: 40px;
+        z-index: 10;
+    }
+
+    .back-arrow-btn {
+        background: none;
+        border: none;
+        color: #8dbdc1;
+        font-size: 22px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(141, 189, 193, 0.15);
+        background: rgba(255, 255, 255, 0.01);
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .back-arrow-btn:hover {
+        color: #ffffff;
+        border-color: rgba(141, 189, 193, 0.4);
+        background: rgba(141, 189, 193, 0.08);
+        transform: translateX(-4px);
+    }
+
+    /* ===== MASTER HEADER ===== */
+    h1 {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 50px;
+        margin-top: 20px;
+        line-height: 1.3;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-title {
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: #8dbdc1;
+        margin-top: 40px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .section-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(141, 189, 193, 0.3), transparent);
+    }
+
+    /* ===== KEY HIGHLIGHTS GRID ===== */
+    .highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 50px;
+    }
+
+    .highlight-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(141, 189, 193, 0.08);
+        padding: 24px;
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        gap: 16px;
+    }
+
+    .highlight-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: #8dbdc1;
+        line-height: 1;
+    }
+
+    .highlight-text {
+        color: #dae5e6;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    /* ===== DETAILED PARAGRAPHS ===== */
+    .content-body p {
+        color: #dae5e6;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.8;
+        margin-bottom: 24px;
+        text-align: justify;
+    }
+
+    /* ===== RESPONSIVE STYLING ===== */
+    @media (max-width: 768px) {
+        .highlights-grid { grid-template-columns: 1fr; }
+        h1 { font-size: 34px; margin-top: 60px; }
+        .back-button-wrapper { top: 20px; left: 20px; }
+        .container { padding: 20px 20px 60px; }
+    }
+</style>
+<div class="back-button-wrapper">
+    <a href="leadership.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+</div>
+
+<h1>From Representative to Leader</h1>
+
+<div class="section-title">Key Highlights</div>
+
+<div class="highlights-grid">
+    <div class="highlight-card">
+        <span class="highlight-num">01</span>
+        <p class="highlight-text">Progressed from Vice Head Boy to Head Boy, evolving from executing initiatives to leading the student body, driving decisions, and being accountable for outcomes affecting hundreds of students.</p>
+    </div>
+    
+    <div class="highlight-card">
+        <span class="highlight-num">02</span>
+        <p class="highlight-text">Managed cross-functional collaboration between students, teachers, school leadership, and visiting dignitaries, developing the ability to align diverse stakeholders around shared goals.</p>
+    </div>
+
+    <div class="highlight-card">
+        <span class="highlight-num">03</span>
+        <p class="highlight-text">Led the planning and execution of major school events, campaigns, and competitions, strengthening my skills in team management, problem-solving, and operational leadership under pressure.</p>
+    </div>
+
+    <div class="highlight-card">
+        <span class="highlight-num">04</span>
+        <p class="highlight-text">Transformed from a reserved student into a confident leader through a school-wide election campaign and continuous engagement with senior administrators, learning how to inspire trust, communicate vision, and create impact through service.</p>
+    </div>
+</div>
+
+<div class="section-title">Detailed Narrative</div>
+
+<div class="content-body">
+    <p>My journey as a student leader began when I was elected Vice Head Boy for the 2023–2024 academic year. While I initially viewed the role as an opportunity to contribute to my school community, it ultimately became one of the most transformative leadership experiences of my life. It was the first time I was entrusted with significant responsibility, expected to represent hundreds of students, and required to bridge the gap between students, teachers, and school leadership. More importantly, it was the experience that shaped my understanding of what leadership truly means.</p>
+
+    <p>One of my earliest responsibilities as Vice Head Boy was representing the school during visits by distinguished leaders, entrepreneurs, and professionals. I had the opportunity to personally welcome guests, interact with them, and participate in discussions about leadership, innovation, and societal impact. These interactions exposed me to accomplished individuals from diverse backgrounds and taught me the importance of communication, confidence, and professionalism. Listening to their experiences broadened my perspective and inspired me to think beyond the classroom.</p>
+
+    <p>As Vice Head Boy, I worked closely with teachers, the Head Boy, Head Girl, and other members of the student leadership body. Through this collaboration, I learned that leadership is not simply about giving directions; it is about ensuring that ideas are executed effectively. I was responsible for helping translate plans into action, coordinating between stakeholders, and ensuring that responsibilities were fulfilled. This experience taught me the value of accountability, attention to detail, and teamwork. I learned how successful organizations depend on strong execution as much as strong ideas.</p>
+
+    <p>The role also challenged me to work with a diverse group of students, each with different personalities, perspectives, and motivations. Managing teams and coordinating activities required patience, adaptability, and empathy. I learned how to resolve conflicts, motivate peers, and bring individuals together around a common objective. These experiences helped me develop emotional intelligence and understand that leadership is fundamentally about people. Success depended not on authority, but on trust and collaboration.</p>
+
+    <p>Perhaps one of the most significant personal developments came from the election process itself. Campaigning for the position forced me outside my comfort zone. Prior to the election, I was naturally more reserved. Speaking to large groups, persuading others, and presenting my vision to the student body required me to develop confidence and become more outgoing. The process taught me how to communicate effectively, connect with people, and earn their trust. Winning the election was rewarding, but the greater lesson was learning how leadership begins with the ability to inspire others.</p>
+
+    <p>Throughout the year, I played an active role in organizing and managing major school events, including Sports Day, inter-school competitions, intra-school activities, awareness campaigns, and student engagement initiatives. These events involved coordinating multiple teams, managing logistics, addressing unexpected challenges, and ensuring smooth execution. I was also responsible for maintaining discipline, monitoring student concerns, and submitting reports to school authorities. These responsibilities taught me how to remain calm under pressure, make decisions quickly, and balance competing priorities.</p>
+
+    <p>Another invaluable aspect of the role was the opportunity to interact regularly with the Principal and Vice Principal. Observing how they approached complex challenges gave me insights into effective leadership at an institutional level. I learned the importance of structured problem-solving, strategic thinking, and thoughtful decision-making. More importantly, I observed that leadership does not end with identifying solutions; true leaders ensure those solutions are implemented effectively and create meaningful impact.</p>
+
+    <p>My growth accelerated further when I was entrusted with the role of Head Boy. The transition represented more than a promotion—it marked a shift from supporting leadership to becoming the primary student leader. The scope of my responsibilities expanded significantly. I became accountable for larger teams, more complex initiatives, and greater transparency in decision-making. Every action carried greater consequences, requiring me to think carefully about both immediate outcomes and long-term implications.</p>
+
+    <p>As Head Boy, I interacted more frequently with school management, faculty members, student representatives, and visiting dignitaries. These experiences strengthened my confidence and maturity while exposing me to different leadership styles and perspectives. I learned how to communicate across organizational levels, build consensus among diverse stakeholders, and lead with integrity. Most importantly, I discovered that leadership is not defined by a title but by the ability to create positive outcomes for others.</p>
+
+    <p>Looking back, my progression from Vice Head Boy to Head Boy fundamentally transformed me. It taught me how to lead teams, navigate uncertainty, communicate effectively, and take responsibility for outcomes. The experience helped me develop resilience, accountability, and a service-oriented mindset. Above all, it reinforced a lesson that continues to guide me today: leadership is not about being in charge—it is about creating an environment where others can succeed. These experiences laid the foundation for my future aspirations and shaped the leader I am continuing to become.</p>
+</div>
