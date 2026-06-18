@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWCC Victory | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CORE BRAND PRESETS ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #0e171e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* ===== BACKGROUND AMBIENT BLOBS ===== */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -15%;
+            right: -10%;
+            width: 75vw;
+            height: 75vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.35) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        /* ===== STRUCTURAL CONTAINER ===== */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 60px 30px 120px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
+        .back-button-wrapper {
+            margin-bottom: 40px;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
+        }
+
+        /* ===== MASTER TITLE DECK ===== */
+        .header-deck {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-deck h2 {
+            font-size: 13px;
+            color: #4ecdc4;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .header-deck h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        /* ===== SECTION SEPARATOR HEADER ===== */
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #8dbdc1;
+            margin: 50px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(141, 189, 193, 0.3), transparent);
+        }
+
+        /* ===== FLOATING HIGHLIGHT CARDS (2x2 Grid) ===== */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(145deg, rgba(53, 99, 101, 0.12) 0%, rgba(14, 23, 30, 0.4) 100%);
+            border: 1px solid rgba(141, 189, 193, 0.12);
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(141, 189, 193, 0.3);
+            background: linear-gradient(145deg, rgba(53, 99, 101, 0.18) 0%, rgba(14, 23, 30, 0.5) 100%);
+        }
+
+        .highlight-index {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .highlight-text {
+            font-size: 15px;
+            color: #dae5e6;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .highlight-text strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* ===== PROSE TEXT & NARRATIVE ARCHITECTURE ===== */
+        .story-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            line-height: 1.3;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 60px 0 24px;
+            background: linear-gradient(135deg, #ffffff 60%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 16.5px;
+            color: #dae5e6;
+            margin-bottom: 28px;
+            text-align: justify;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .quote-callout {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 21px;
+            color: #c4dedf;
+            border-left: 3px solid #4ecdc4;
+            padding-left: 24px;
+            margin: 40px 0;
+            line-height: 1.6;
+        }
+
+        /* ===== EXTERNAL SOCIAL MEDIA LINK PORTAL ===== */
+        .link-wrapper {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(141, 189, 193, 0.1);
+        }
+
+        .social-portal-btn {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(141, 189, 193, 0.1);
+            padding: 20px 28px;
+            border-radius: 16px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15.5px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-portal-btn:hover {
+            background: rgba(141, 189, 193, 0.08);
+            border-color: rgba(141, 189, 193, 0.4);
+            transform: translateX(4px);
+        }
+
+        .social-portal-btn .pulse-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #4ecdc4;
+            border-radius: 50%;
+            margin-right: 14px;
+            box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7);
+            animation: pulse-ring 1.6s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(78, 142, 147, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0); }
+        }
+
+        /* ===== RESPONSIVE MEDIA QUERIES ===== */
+        @media (max-width: 768px) {
+            .highlights-grid { grid-template-columns: 1fr; }
+            .header-deck h1 { font-size: 38px; }
+            .story-heading { font-size: 26px; }
+            p { font-size: 15.5px; text-align: left; }
+            .container { padding: 40px 20px 80px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-blobs"></div>
+
+<div class="container">
+
+    <!-- Back Arrow Navigation to Leadership Grid -->
+    <div class="back-button-wrapper">
+        <a href="leadership.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+    </div>
+
+    <!-- Corporate Branding Deck -->
+    <div class="header-deck">
+        <h2>Real World Challenge Convention</h2>
+        <h1>RWCC 2023 Victory</h1>
+    </div>
+
+    <!-- Section: Key Highlights -->
+    <div class="section-title">Key Highlights</div>
+    <div class="highlights-grid">
+        <div class="highlight-card">
+            <span class="highlight-index">Key 01</span>
+            <div class="highlight-text">
+                <strong>Winner, RWCC 2023</strong> (Social & Commercial Entrepreneurship): Led a 3-member team to build Safety Sphere, a location-intelligence platform enabling data-driven housing decisions.
+            </div>
+        </div>
+        <div class="highlight-card">
+            <span class="highlight-index">Key 02</span>
+            <div class="highlight-text">
+                Identified a major <strong>market inefficiency</strong> in India's real-estate sector and designed a scalable solution integrating safety, affordability, infrastructure, and livability insights.
+            </div>
+        </div>
+        <div class="highlight-card">
+            <span class="highlight-index">Key 03</span>
+            <div class="highlight-text">
+                Managed <strong>end-to-end product development</strong>, aligning cross-disciplinary research, technology stack selection, and business model strategies.
+            </div>
+        </div>
+        <div class="highlight-card">
+            <span class="highlight-index">Key 04</span>
+            <div class="highlight-text">
+                Demonstrated high-stress <strong>executive leadership</strong> on an international stage, presenting a solution recognized for commercial viability and societal relevance.
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Narrative Story -->
+    <h3 class="story-heading">Building Safety Sphere: Reimagining How India Makes Its Biggest Financial Decision</h3>
+    
+    <p>Some businesses solve inconveniences. Others solve billion-dollar problems hidden in plain sight.</p>
+    
+    <p>At RWCC 2023, hosted by the Global Indian International School SMART Campus in Singapore, I had the privilege of leading a team of three to develop <strong>Safety Sphere</strong>, an intelligent location-analysis platform designed to address one of the most consequential decisions millions of Indians make: where to live and where to invest.</p>
+    
+    <p>For most middle-class Indian families, purchasing a home is not merely a transaction—it is often the single largest financial commitment of their lifetime. Yet this decision is frequently made using fragmented information, incomplete research, word-of-mouth recommendations, or promotional material that highlights only the positives of a location. The result is a significant information gap between what buyers believe they are investing in and the reality they eventually experience.</p>
+    
+    <div class="quote-callout">
+        "Between 2020 and 2024, residential property prices in India grew at approximately 9.3% annually, while household incomes grew at roughly 5.4%."
+    </div>
+
+    <p>This challenge is becoming increasingly important. Recent analyses have shown that property prices in India have been rising faster than household incomes, widening the affordability gap for middle-class families. As housing becomes more expensive, every investment decision carries greater financial risk.</p>
+    
+    <p>Recognizing this problem, I led the conception and development of Safety Sphere. Our vision was simple but ambitious: create a platform that gives ordinary citizens the same depth of location intelligence that professional analysts, investors, and consultants rely on.</p>
+    
+    <p>Safety Sphere evaluated neighborhoods using multiple dimensions simultaneously, including safety indicators, affordability metrics, residential suitability, infrastructure accessibility, and quality-of-life factors. More importantly, it integrated localized information often overlooked by traditional real-estate platforms—such as crime-related developments, water supply issues, civic disruptions, and neighborhood-level concerns that directly affect daily life.</p>
+    
+    <p>Rather than asking users to navigate dozens of disconnected sources, Safety Sphere consolidated critical information into a single decision-making ecosystem. We wanted users to understand not just the price of a property, but the reality of living there.</p>
+    
+    <p>As team leader, I drove the project's overall vision, coordinated research efforts, structured our problem-solving framework, and ensured that every feature addressed a genuine market inefficiency. I worked closely with my teammates to transform an abstract idea into a practical, scalable solution. Leadership in this context was not about assigning tasks—it was about aligning technical execution with a compelling social mission.</p>
+    
+    <div class="quote-callout">
+        "We were not building another property-search application. We were addressing information asymmetry in one of the largest sectors of the Indian economy."
+    </div>
+
+    <p>What made Safety Sphere particularly compelling was its intersection of entrepreneurship, technology, and social impact. Research has consistently shown that neighborhood characteristics—including safety, accessibility, and environmental quality—play a major role in determining both property value and long-term livability. Yet these factors remain scattered across multiple sources and are rarely presented in a unified, user-friendly format.</p>
+    
+    <p>Our solution resonated strongly with judges because it tackled a challenge affecting millions of families while demonstrating commercial viability and scalability. The project was evaluated against entries from Global Schools Foundation institutions across Asia, bringing together some of the region's most innovative young problem-solvers.</p>
+    
+    <p>Ultimately, Safety Sphere emerged as the <strong>Winner of the Innovative Social & Commercial Entrepreneurship Category</strong>, a distinction that reflected not only technical creativity but also the project's potential societal relevance. The victory represented far more than a trophy. It validated our belief that entrepreneurship is fundamentally about identifying systemic problems and creating solutions that empower people to make better decisions.</p>
+    
+    <p>For me, Safety Sphere was a defining experience. It taught me how to transform a complex social challenge into a scalable venture, how to lead a multidisciplinary team under pressure, and how to communicate a vision capable of inspiring both collaborators and evaluators. Most importantly, it reinforced my conviction that technology becomes truly powerful when it helps people navigate life's most important decisions with greater confidence, transparency, and security.</p>
+    
+    <p>Winning at RWCC 2023 was an incredible achievement. But the greater accomplishment was proving that a team of students could look at a problem affecting millions, imagine a better solution, and build something worthy of recognition on an international stage.</p>
+
+    <!-- Social Media Link Block -->
+    <div class="link-wrapper">
+        <a href="https://www.facebook.com/GIIS.Noida/posts/giis-noida-proudly-shares-that-our-students-have-done-exceptionally-well-in-the-/865904628877689/" class="social-portal-btn" target="_blank">
+            <span class="pulse-indicator"></span> 🌐 View Official Announcement on Facebook
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
