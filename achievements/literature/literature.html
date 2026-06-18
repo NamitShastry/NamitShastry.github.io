@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literature Achievements | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #0e171e;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        /* Dynamic Organic Aurora Waves */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+            overflow: hidden;
+        }
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(53, 99, 101, 0.3) 0%, transparent 70%);
+            filter: blur(60px);
+            border-radius: 50%;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #8dbdc1;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 240px);
+            gap: 20px;
+        }
+        .grid-link { text-decoration: none; color: white; }
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(141, 189, 193, 0.08);
+            padding: 40px 20px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+        }
+        .grid-link:hover .card {
+            transform: translateY(-4px);
+            background: rgba(141, 189, 193, 0.06);
+            border-color: rgba(141, 189, 193, 0.3);
+            box-shadow: 0 20px 40px rgba(78, 142, 147, 0.15);
+        }
+        .back-home {
+            margin-top: 50px;
+            color: #8dbdc1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-home:hover { color: white; }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
 
+<div class="bg-blobs"></div>
+
+<h1>Literature</h1>
+<div class="subtitle">Select a project below</div>
+
+<div class="grid">
+    <a href="aalekh.html" class="grid-link">
+        <div class="card">🏆 Aalekh Award</div>
+    </a>
+    <a href="intach.html" class="grid-link">
+        <div class="card">🏛️ INTACH Project</div>
+    </a>
+</div>
+
+<a href="../../index.html" class="back-home">← Back to Main Website</a>
+
+</body>
+</html>
