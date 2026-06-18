@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== MODERN DESIGN RESET & AMBIENT CANVAS ===== */
+        /* ===== MODERN DESIGN RESET & VIBRANT AMBIENT CANVAS ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,16 +17,31 @@
         }
         
         body {
-            background-color: #050505;
-            /* Radial ambient grid illumination overlay */
-            background-image: 
-                radial-gradient(circle at 50% -20%, rgba(245, 197, 66, 0.12), transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(245, 197, 66, 0.04), transparent 40%);
-            color: #e5e5e5;
+            /* Create the complex, multi-layer animated rainbow gradient */
+            background: linear-gradient(135deg, #1c1c2b, #121212);
+            position: relative;
+            /* Update to brilliant white for high contrast on a moving colorful background */
+            color: #ffffff;
             font-family: 'Inter', sans-serif;
             line-height: 1.8;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Pure CSS Animated Rainbow Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #3d2f2f, #2b3a3d, #2f3d35, #3d3b2f);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            filter: blur(100px);
+            opacity: 0.8;
+            z-index: -1;
         }
 
         .container {
@@ -42,8 +57,8 @@
             font-size: 56px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            /* Premium Metallic Gold Gradient */
-            background: linear-gradient(135deg, #ffffff 0%, #f5c542 60%, #b58a15 100%);
+            /* Brilliant Metallic White/Gold Gradient */
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 60%, #b58a15 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 60px;
@@ -62,6 +77,7 @@
             position: relative;
             border-radius: 16px;
             overflow: hidden;
+            /* High contrast bento grid boxes */
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
             aspect-ratio: 4/3;
@@ -80,6 +96,7 @@
         /* High-End Hover Elevation Mechanics */
         .img-wrapper:hover {
             transform: translateY(-8px) scale(1.02);
+            /* Soft Amber Glow on hover */
             border-color: rgba(245, 197, 66, 0.4);
             box-shadow: 0 20px 40px rgba(245, 197, 66, 0.1);
         }
@@ -96,6 +113,7 @@
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 3px;
+            /* Use vibrant amber for clear section markers */
             color: #f5c542;
             margin-top: 80px;
             margin-bottom: 24px;
@@ -108,12 +126,13 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(245, 197, 66, 0.3), transparent);
+            /* Rainbow shimmer gradient line separator */
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #f5c542, transparent);
         }
 
         /* ===== EDITORIAL TYPOGRAPHY BUILD ===== */
         p {
-            color: #b3b3b3;
+            color: #ffffff;
             font-size: 16px;
             margin-bottom: 30px;
             text-align: justify;
@@ -123,6 +142,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 600;
+            /* Sharp white headings for depth */
             color: #ffffff;
             margin-top: 60px;
             margin-bottom: 20px;
@@ -137,6 +157,7 @@
         }
 
         .skill-card {
+            /* High-contrast bento card background */
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 30px;
@@ -167,12 +188,13 @@
         }
 
         .jury-member {
+            /* High-contrast list background */
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 24px;
             border-radius: 14px;
             font-size: 15px;
-            color: #cccccc;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
 
@@ -206,6 +228,7 @@
         .media-link {
             display: flex;
             align-items: center;
+            /* Industrial Link Designs with clean white border */
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 18px 24px;
@@ -245,6 +268,12 @@
         .scroll-reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes fadeInDown {
@@ -308,19 +337,19 @@
     <div class="skill-container">
         <div class="skill-card scroll-reveal">
             <div class="skill-heading">• Rigorous Analytical Thinking</div>
-            <p style="margin:0; font-size:14px;">Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</p>
+            <p style="margin:0; font-size:14px; text-align: left;">Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</p>
         </div>
         <div class="skill-card scroll-reveal">
             <div class="skill-heading">• Operational Discipline</div>
-            <p style="margin:0; font-size:14px;">Committing to months of isolation and unrelenting work, managing school curricula alongside drafting, editing, and formatting.</p>
+            <p style="margin:0; font-size:14px; text-align: left;">Committing to months of isolation and unrelenting work, managing school curricula alongside drafting, editing, and formatting.</p>
         </div>
         <div class="skill-card scroll-reveal">
             <div class="skill-heading">• Resilience and Iteration</div>
-            <p style="margin:0; font-size:14px;">Systematically reconstructing chapters to achieve a professional standard.</p>
+            <p style="margin:0; font-size:14px; text-align: left;">Systematically reconstructing chapters to achieve a professional standard.</p>
         </div>
         <div class="skill-card scroll-reveal">
             <div class="skill-heading">• Strategic Execution</div>
-            <p style="margin:0; font-size:14px;">Managing publishing, cover design, metadata, and distribution global networks.</p>
+            <p style="margin:0; font-size:14px; text-align: left;">Managing publishing, cover design, metadata, and distribution global networks.</p>
         </div>
     </div>
 
