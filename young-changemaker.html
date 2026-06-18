@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Young Changemaker Award | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CORE BRAND PRESETS ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #0e171e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* ===== AMBIENT BACKDROP ===== */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.4) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        /* ===== STRUCTURAL CONTAINER ===== */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 60px 40px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
+        .back-button-wrapper {
+            position: absolute;
+            top: 60px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
+        }
+
+        /* ===== ARTICLE HEADER ===== */
+        header {
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8dbdc1;
+            font-weight: 500;
+        }
+
+        /* ===== FEATURED IMAGE CONTAINER ===== */
+        .image-container {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            overflow: hidden;
+            margin-bottom: 40px;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            font-size: 14px;
+            color: #a3b8ba;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===== ESSAY CONTENT ===== */
+        .content p {
+            color: #dae5e6;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .back-button-wrapper { top: 20px; left: 20px; }
+            .container { padding: 20px 20px 60px; }
+            header { margin-top: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-blobs"></div>
+
+<div class="container">
+
+    <div class="back-button-wrapper">
+        <a href="achievements.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+    </div>
+
+    <header>
+        <span class="subtitle">AIIMS Delhi • MATE Programme</span>
+        <h1>Young Changemaker Award</h1>
+    </header>
+
+    <div class="image-container">
+        <img src="changemaker.jpg" alt="Young Changemaker Award Ceremony" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="image-placeholder" style="display:none;">[ Award Image Space ]</div>
+    </div>
+
+    <div class="content">
+        <p>A defining moment in my journey came through my recognition at the MATE (Mental Health and Adolescent Transformative Engagement) Programme hosted by AIIMS Delhi, an initiative that celebrates students who demonstrate excellence not only in achievement, but also in leadership, resilience, and meaningful contribution to society.</p>
+
+        <p>I was honoured with the Young Change Maker Award for my accomplishments in chess. While the award acknowledged competitive success, its deeper significance lay in what the game had taught me long before any trophy was won. Chess is often perceived as a game of pieces and positions; for me, it has been an education in disciplined thinking, strategic foresight, calculated risk-taking, and composure under pressure. Every move demands responsibility. Every decision carries consequences. Every setback becomes an opportunity to learn, adapt, and return stronger.</p>
+
+        <p>These lessons have extended far beyond the chessboard. The ability to analyse complex situations, anticipate challenges, and remain calm in uncertain environments has shaped the way I approach leadership, academics, and community engagement. Whether contributing to school initiatives, pursuing ambitious projects, or working with teams toward shared goals, I have consistently drawn upon the habits of preparation, patience, and critical thinking that chess instilled in me.</p>
+
+        <p>What made this recognition especially meaningful was the community it represented. The programme brought together young individuals who were creating impact across diverse fields—from academics and sports to social initiatives and innovation. Being among them reinforced a belief that has guided much of my journey: excellence achieves its greatest value when it inspires and empowers others.</p>
+
+        <p>The Young Change Maker Award was not merely a recognition of past achievement; it was a reminder of the responsibility that accompanies potential. It strengthened my conviction that leadership is not defined by titles or positions, but by the ability to translate personal discipline into meaningful action, create opportunities for others, and contribute positively to the world around us.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
