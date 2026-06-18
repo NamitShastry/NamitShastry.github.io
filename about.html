@@ -6,10 +6,10 @@
     <title>About Me | Namit Shastry</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== MODERN DESIGN RESET & ORGANIC AMBIENT CANVAS ===== */
+        /* ===== CORE BRAND PRESETS ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -22,11 +22,11 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.8;
             overflow-x: hidden;
-            position: relative;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* ===== SYNAPSE-INSPIRED FLUID GRADIENT BLOBS ===== */
+        /* ===== AMBIENT BACKDROP ===== */
         .bg-blobs {
             position: fixed;
             top: 0;
@@ -41,48 +41,37 @@
         .bg-blobs::before {
             content: '';
             position: absolute;
-            top: -20%;
-            right: -10%;
+            top: -10%;
+            left: -10%;
             width: 70vw;
             height: 70vw;
-            background: radial-gradient(circle, rgba(78, 142, 147, 0.45) 0%, rgba(39, 76, 85, 0) 70%);
-            border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%;
-            filter: blur(60px);
-            animation: wave-movement 22s infinite alternate ease-in-out;
-        }
-
-        .bg-blobs::after {
-            content: '';
-            position: absolute;
-            bottom: -15%;
-            left: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(53, 99, 101, 0.35) 0%, rgba(14, 23, 30, 0) 70%);
-            border-radius: 50% 40% 55% 45% / 40% 60% 40% 60%;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.35) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 50%;
             filter: blur(80px);
-            animation: wave-movement 18s infinite alternate-reverse ease-in-out;
         }
 
+        /* ===== STRUCTURAL CONTAINER ===== */
         .container {
-            max-width: 860px;
+            max-width: 900px;
             margin: auto;
-            padding: 40px 40px 100px;
+            padding: 60px 40px 100px;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== ACTION BACK BUTTON ARROW ===== */
+        /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
         .back-button-wrapper {
-            margin-bottom: 30px;
-            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: absolute;
+            top: 60px;
+            left: 40px;
+            z-index: 10;
         }
 
         .back-arrow-btn {
             background: none;
             border: none;
             color: #8dbdc1;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -92,6 +81,7 @@
             border-radius: 50%;
             border: 1px solid rgba(141, 189, 193, 0.15);
             background: rgba(255, 255, 255, 0.01);
+            text-decoration: none;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -102,30 +92,82 @@
             transform: translateX(-4px);
         }
 
-        /* ===== KINETIC MASTER HEADER ===== */
-        h1 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 58px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 60px;
-            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* ===== PROFILE HEADER BLOCK ===== */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 50px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(141, 189, 193, 0.06);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
-        /* ===== SECTION HEADER SEPARATORS ===== */
+        .image-frame {
+            width: 160px;
+            height: 160px;
+            border-radius: 16px;
+            border: 1px solid rgba(141, 189, 193, 0.2);
+            overflow: hidden;
+            background: rgba(141, 189, 193, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder-text {
+            font-size: 12px;
+            color: #8dbdc1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .profile-meta h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 40%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .profile-meta .degree {
+            font-size: 18px;
+            font-weight: 400;
+            color: #8dbdc1;
+            margin-bottom: 4px;
+        }
+
+        .profile-meta .university {
+            font-size: 15px;
+            font-weight: 300;
+            color: #a3b8ba;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SECTION HEADERS ===== */
         .section-title {
             font-family: 'Inter', sans-serif;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 3px;
             color: #8dbdc1;
             margin-top: 50px;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -135,98 +177,69 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(141, 189, 193, 0.3), transparent);
+            background: linear-gradient(90deg, rgba(141, 189, 193, 0.2), transparent);
         }
 
-        p {
+        /* ===== BIOGRAPHY CONTENT BLOCKS ===== */
+        .about-content p {
             color: #dae5e6;
-            font-size: 16.5px;
-            margin-bottom: 30px;
-            text-align: justify;
+            font-size: 16px;
             font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 28px;
+            text-align: justify;
         }
 
-        /* ===== TIMELINE / SCHOOLING CARDS ===== */
-        .timeline-container {
+        /* ===== EDUCATION BLOCK CLEAN LAYOUT ===== */
+        .education-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin: 30px 0;
+            gap: 30px;
         }
 
-        .timeline-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(141, 189, 193, 0.08);
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
+        .education-item {
+            background: rgba(255, 255, 255, 0.01);
+            border-left: 2px solid rgba(141, 189, 193, 0.3);
+            padding-left: 24px;
+            padding-top: 4px;
+            padding-bottom: 4px;
         }
 
-        .timeline-card:hover {
-            background: rgba(141, 189, 193, 0.04);
-            border-color: rgba(141, 189, 193, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .school-name {
+        .edu-institution {
             font-family: 'Playfair Display', serif;
             font-size: 22px;
             font-weight: 600;
             color: #ffffff;
+            margin-bottom: 4px;
         }
 
-        .timeline-date {
-            font-size: 14px;
-            color: #4ecdc4;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .school-details {
+        .edu-meta {
+            font-size: 14.5px;
             color: #8dbdc1;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            font-weight: 500;
+            margin-bottom: 6px;
         }
 
-        /* ===== ANIMATION SYSTEM ===== */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        .edu-desc {
+            font-size: 14.5px;
+            color: #a3b8ba;
+            font-weight: 300;
         }
 
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes wave-movement {
-            0% { border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%; transform: translate(0, 0) rotate(0deg); }
-            50% { border-radius: 60% 40% 45% 55% / 50% 55% 45% 50%; transform: translate(-40px, 30px) rotate(60deg); }
-            100% { border-radius: 40% 60% 50% 50% / 40% 45% 55% 60%; transform: translate(20px, -20px) rotate(120deg); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* ===== RESPONSIVE DESIGN VIEWPORTS ===== */
         @media (max-width: 768px) {
-            h1 { font-size: 38px; }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+                gap: 24px;
+            }
+            .profile-meta h1 { font-size: 32px; }
+            .profile-meta .degree { font-size: 16px; }
+            .profile-meta .university { font-size: 14px; }
+            .back-button-wrapper { top: 20px; left: 20px; }
             .container { padding: 20px 20px 60px; }
-            .timeline-header { flex-direction: column; gap: 4px; }
+            .edu-institution { font-size: 19px; }
         }
     </style>
 </head>
@@ -237,55 +250,54 @@
 <div class="container">
 
     <div class="back-button-wrapper">
-        <button onclick="history.back()" class="back-arrow-btn" aria-label="Go Back">←</button>
+        <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
     </div>
 
-    <h1>About Me</h1>
+    <div class="profile-header">
+        <div class="image-frame">
+            <img src="profile.jpg" alt="Namit Shastry" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="image-placeholder-text" style="display:none;">Photo</span>
+        </div>
+        <div class="profile-meta">
+            <h1>Namit Shastry</h1>
+            <div class="degree">B.Tech Civil Engineering</div>
+            <div class="university">MNIT Jaipur</div>
+        </div>
+    </div>
 
-    <div class="section-title scroll-reveal">Biography</div>
-    <p class="scroll-reveal">
-        I am a focused researcher, writer, and strategist committed to multi-disciplinary excellence. From constructing complex narrative worlds in my debut psychological thriller to competing at elite levels in chess tournaments and publishing technical research, my profile centers on structured planning, high-level project management, and rapid execution.
-    </p>
+    <div class="section-title">Biography</div>
 
-    <div class="section-title scroll-reveal">Education & Schooling</div>
-    
-    <div class="timeline-container">
-        <div class="timeline-card scroll-reveal">
-            <div class="timeline-header">
-                <div class="school-name">Global Indian International School</div>
-                <div class="timeline-date">High School</div>
-            </div>
-            <div class="school-details">Noida, India</div>
-            <p style="margin:0; font-size:15px; text-align: left;">
-                Developed a strong baseline in scientific inquiry, writing, and systemic project tracking. Honored by the school and Bennett University for major literary and academic distinctions during this period.
-            </p>
+    <div class="about-content">
+        <p>At an age when most students are still discovering their interests, I have dedicated myself to pursuing excellence across literature, entrepreneurship, research, and leadership with a singular belief: meaningful impact is created at the intersection of ideas, innovation, and execution.</p>
+
+        <p>My journey first gained recognition when my debut novel, <em>The Mysterious Call</em>, received the prestigious Aalekh Award and was formally honored by former Union Education Minister Dr. Ramesh Pokhriyal Nishank and Dr Kiran Bedi (IPS). The achievement was not merely a literary milestone—it represented the culmination of years spent developing the discipline to transform imagination into tangible work. Since then, my writing, research, and leadership pursuits have been guided by the same principle: creating outcomes that extend beyond personal accomplishment.</p>
+
+        <p>Alongside my literary work, I have earned national and international recognition through academic competitions, entrepreneurship initiatives, and innovation challenges. My achievements include national honors from INTACH, international distinctions in science and mathematics competitions, and success in entrepreneurship forums that encouraged me to explore how ideas can evolve into solutions with real-world value.</p>
+
+        <p>Beyond awards, I am deeply interested in solving complex problems. As an aspiring civil engineer, I am particularly fascinated by the challenges of urban infrastructure, sustainability, and resilient cities. My long-term goal is to combine rigorous technical expertise with entrepreneurial thinking to develop solutions capable of improving millions of lives. Whether through research, technology, public policy, or business leadership, I aspire to contribute to projects that create lasting societal impact.</p>
+
+        <p>I believe that exceptional achievement is rarely the result of talent alone. It is built through relentless curiosity, disciplined execution, and the willingness to pursue ambitious goals long before they appear attainable. These principles have shaped my journey so far and continue to guide my aspirations for the future.</p>
+
+        <p>I am not merely preparing for a career; I am preparing to build, lead, and create at a scale that matters.</p>
+    </div>
+
+    <div class="section-title">Schooling</div>
+
+    <div class="education-list">
+        <div class="education-item">
+            <div class="edu-institution">Malaviya National Institute of Technology, Jaipur</div>
+            <div class="edu-meta">2026 - Present</div>
+            <div class="edu-desc">B.Tech, Civil Engineering</div>
         </div>
 
-        <div class="timeline-card scroll-reveal">
-            <div class="timeline-header">
-                <div class="school-name">Academic Focus Areas</div>
-                <div class="timeline-date">Core Track</div>
-            </div>
-            <div class="school-details">Advanced Research & Analytical Reasoning</div>
-            <p style="margin:0; font-size:15px; text-align: left;">
-                Concentrated heavily on algorithmic game formulations (Chess mechanics), socio-economic history research, and advanced prose structuring.
-            </p>
+        <div class="education-item">
+            <div class="edu-institution">Global Indian International School</div>
+            <div class="edu-meta">2022 - 2026</div>
+            <div class="edu-desc">Studied for secondary and senior secondary grades (IX to XII)</div>
         </div>
     </div>
 
 </div>
-
-<script>
-    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-    document.querySelectorAll('.scroll-reveal').forEach((el) => { observer.observe(el); });
-</script>
 
 </body>
 </html>
