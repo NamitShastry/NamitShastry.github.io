@@ -1,249 +1,401 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Aalekh Award</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aalekh Award | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        /* ===== MODERN DESIGN RESET & AMBIENT CANVAS ===== */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #050505;
+            /* Radial ambient grid illumination overlay */
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(245, 197, 66, 0.12), transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(245, 197, 66, 0.04), transparent 40%);
+            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: auto;
-            padding: 40px;
+            padding: 100px 40px;
         }
 
+        /* ===== KINETIC MASTER HEADER ===== */
         h1 {
             text-align: center;
-            font-size: 48px;
-            color: #f5c542;
-            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            /* Premium Metallic Gold Gradient */
+            background: linear-gradient(135deg, #ffffff 0%, #f5c542 60%, #b58a15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 60px;
+            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* ===== BENTO GLASS GRID WITH FLUID POP ===== */
         .images {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 70px;
+        }
+
+        .img-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            aspect-ratio: 4/3;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
         }
 
         .images img {
             width: 100%;
-            border-radius: 10px;
-            background: #222;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(20%);
         }
 
+        /* High-End Hover Elevation Mechanics */
+        .img-wrapper:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(245, 197, 66, 0.4);
+            box-shadow: 0 20px 40px rgba(245, 197, 66, 0.1);
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.08);
+            filter: grayscale(0%);
+        }
+
+        /* ===== SECTION HEADER SEPARATORS ===== */
         .section-title {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
             color: #f5c542;
-            font-size: 22px;
-            margin-top: 30px;
-            margin-bottom: 10px;
+            margin-top: 80px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(245, 197, 66, 0.3), transparent);
+        }
+
+        /* ===== EDITORIAL TYPOGRAPHY BUILD ===== */
         p {
-            line-height: 1.9;
-            color: #ddd;
+            color: #b3b3b3;
             font-size: 16px;
-            white-space: pre-line;
+            margin-bottom: 30px;
+            text-align: justify;
         }
 
-        a {
-            color: #4da6ff;
+        .story-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
         }
 
-        .links {
-            margin-top: 20px;
+        .skill-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 40px 0;
         }
 
-        .video iframe {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .skill-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
         }
-/* ===== JURY SECTION ===== */
 
-.jury-heading{
-    font-family:'Inter', sans-serif;
-    font-size:24px;
-    font-style:italic;
-    font-weight:500;
-    letter-spacing:2px;
-    color:#FFD700;
-    margin-top:60px;
-    margin-bottom:30px;
-}
+        .skill-card:hover {
+            background: rgba(245, 197, 66, 0.02);
+            border-color: rgba(245, 197, 66, 0.2);
+            transform: translateY(-3px);
+        }
 
-.jury-member{
-    font-family:'Playfair Display', serif;
-    font-size:20px;
-    line-height:1.9;
-    color:#F8E7A1;
-    margin-bottom:22px;
-    text-shadow:0px 0px 10px rgba(255,215,0,0.18);
-}
+        .skill-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #f5c542;
+            margin-bottom: 12px;
+        }
 
-.jury-member a{
-    color:#FFD700;
-    text-decoration:none;
-    font-weight:700;
-}
+        /* ===== THE JURY INTERACTIVE SHOWCASE ===== */
+        .jury-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+        }
 
-.jury-member a:hover{
-    color:#FFFFFF;
-    text-shadow:0px 0px 14px rgba(255,255,255,0.4);
-}
-/* ===== ACHIEVEMENT SUBHEADINGS ===== */
+        .jury-member {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 24px;
+            border-radius: 14px;
+            font-size: 15px;
+            color: #cccccc;
+            transition: all 0.3s ease;
+        }
 
-.story-heading{
-font-family:'Playfair Display', serif;
-font-size:30px;
-font-weight:700;
-color:#FFD700;
-margin-top:55px;
-margin-bottom:22px;
-text-shadow:0px 0px 12px rgba(255,215,0,0.22);
-}
+        .jury-member:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-.skill-heading{
-font-family:'Playfair Display', serif;
-font-size:22px;
-font-weight:700;
-color:#F8E7A1;
-margin-top:22px;
-margin-bottom:10px;
-text-shadow:0px 0px 8px rgba(255,215,0,0.15);
-}
+        .jury-member a {
+            color: #f5c542;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed rgba(245, 197, 66, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .jury-member a:hover {
+            color: #ffffff;
+            border-bottom-color: #ffffff;
+        }
+
+        /* ===== MODERN FOOTER LINKS & LIVE PULSE ===== */
+        .links-wrapper {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .media-link {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 18px 24px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .media-link:hover {
+            background: rgba(245, 197, 66, 0.05);
+            border-color: rgba(245, 197, 66, 0.3);
+            transform: translateX(6px);
+        }
+
+        /* Active Signal Pulse Animation Indicator */
+        .live-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: #ff4a4a;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7);
+            animation: pulse 1.6s infinite;
+        }
+
+        /* ===== DYNAMIC INTERSECTION OBSERVER ANIMATION CLASSES ===== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 74, 74, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 74, 74, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .images, .skill-container { grid-template-columns: 1fr; }
+            h1 { font-size: 38px; }
+            .container { padding: 60px 20px; }
+        }
     </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- TITLE -->
     <h1>Aalekh Award</h1>
 
-    <!-- IMAGES (PLACEHOLDERS - KEEP FLEXIBLE) -->
-    <div class="images">
-        <img src="https://via.placeholder.com/400x300">
-        <img src="https://via.placeholder.com/400x300">
-        <img src="https://via.placeholder.com/400x300">
-        <img src="https://via.placeholder.com/400x300">
-        <img src="https://via.placeholder.com/400x300">
-        <img src="https://via.placeholder.com/400x300">
+    <div class="images scroll-reveal">
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 1"></div>
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 2"></div>
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 3"></div>
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 4"></div>
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 5"></div>
+        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 6"></div>
     </div>
 
-    <!-- SUMMARY (UNCHANGED TEXT) -->
-    <div class="section-title">Summary</div>
-    <p>
-On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, The Mysterious Call (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious Aalekh Award for literary excellence. The distinction was conferred by an extraordinary national panel, including Dr. Ramesh Pokhriyal Nishank, Dr. Kiran Bedi, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
+    <div class="section-title scroll-reveal">Summary</div>
+    <p class="scroll-reveal">
+        On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, The Mysterious Call (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious Aalekh Award for literary excellence. The distinction was conferred by an extraordinary national panel, including Dr. Ramesh Pokhriyal Nishank, Dr. Kiran Bedi, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
     </p>
 
-    <!-- DETAIL TITLE -->
-    <div class="section-title">The Mysterious Call: Architectural Narrative, Intellectual Rigor, and National Validation</div>
-
-    <p>
-<div class="story-heading">
-The Genesis of a Precocious Enterprise
-</div>
-At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, The Mysterious Call. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.
-
-<div class="story-heading">
-Anatomy of the Narrative: Psychological Depth and Period Realism
-</div>
-Set against the atmospheric, grit-laden backdrop of 1980s London, The Mysterious Call is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.
-
-In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.
-
-    <div class="story-heading">
- The Executive Crucible: From Concept to Global Distribution
-</div>
-Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership.
-
-<div class="skill-heading">
-• Rigorous Analytical Thinking
-</div> Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.  
-<div class="skill-heading">
-• Operational Discipline
-</div> Committing to months of isolation and unrelenting work, managing school curricula alongside drafting, editing, and formatting.  
-<div class="skill-heading">
-• Resilience and Iteration
-</div> Systematically reconstructing chapters to achieve a professional standard.  
-<div class="skill-heading">
-• Strategic Execution
-</div> Managing publishing, cover design, metadata, and distribution.
-
-<div class="story-heading">
-The Litmus Test: National Recognition and Imperial Validation
-</div>
-The ultimate validation of this intellectual endeavor occurred when The Mysterious Call was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.
-The gravity of this distinction was profoundly magnified by the caliber of the national leaders, policymakers, and public intellectuals who convened to confer the honor. My narrative voice and literary capability were evaluated and validated by an extraordinary panel of visionaries, including:
-
-<div class="jury-member">
-• <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank">Dr. Ramesh Pokhriyal 'Nishank'</a> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.
-</div>
-
-<div class="jury-member">
-• <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank">Dr. Kiran Bedi (IPS)</a> – India’s legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.
-</div>
-
-<div class="jury-member">
-• Mr. Harjeet Khanduja – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.
-</div>
-
-<div class="jury-member">
-• Ms. Swapna Liddle – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.
-</div>
-
-<div class="jury-member">
-• Ms. Sutapa Basu – Renowned educationist, poet, and recipient of The Times of India’s prestigious AutHer Award.
-</div>
-
-<div class="jury-member">
-• Mr. Ankit Jhamb – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.
-</div>
-
-<div class="jury-member">
-• Ms. Harshali Singh – Acclaimed author, judge, poet, and recipient of the National Literary Award.
-</div>
-
-<p class="content-text">
-To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.
-</p>
-
-    <div class="story-heading">
-The Forward Horizon
-</div>
-Ultimately, the journey of The Mysterious Call stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.
-
+    <div class="section-title scroll-reveal">The Architecture of Narrative & Execution</div>
+    
+    <div class="story-heading scroll-reveal">The Genesis of a Precocious Enterprise</div>
+    <p class="scroll-reveal">
+        At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, The Mysterious Call. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.
     </p>
 
-    <!-- LINKS ADDED AT END -->
-    <div class="section-title">Media & References</div>
+    <div class="story-heading scroll-reveal">Anatomy of the Narrative: Psychological Depth and Period Realism</div>
+    <p class="scroll-reveal">
+        Set against the atmospheric, grit-laden backdrop of 1980s London, The Mysterious Call is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.
+    </p>
+    <p class="scroll-reveal">
+        In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.
+    </p>
 
-    <div class="links">
-        <p>
-        ▶ Live Stream: 
-        <a href="https://www.youtube.com/watch?v=IkhjX72XFAw" target="_blank">Watch Award Moment</a>
-        </p>
+    <div class="story-heading scroll-reveal">The Executive Crucible: From Concept to Global Distribution</div>
+    <p class="scroll-reveal">
+        Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership.
+    </p>
 
-        <p>
-        ▶ Article: 
-        <a href="https://news.globalindianschool.org/noida/namit-shastry-of-giis-noida-wins-big-at-the-aalekh-2023-by-bennett-university" target="_blank">Global Indian School Article</a>
-        </p>
+    <div class="skill-container">
+        <div class="skill-card scroll-reveal">
+            <div class="skill-heading">• Rigorous Analytical Thinking</div>
+            <p style="margin:0; font-size:14px;">Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</p>
+        </div>
+        <div class="skill-card scroll-reveal">
+            <div class="skill-heading">• Operational Discipline</div>
+            <p style="margin:0; font-size:14px;">Committing to months of isolation and unrelenting work, managing school curricula alongside drafting, editing, and formatting.</p>
+        </div>
+        <div class="skill-card scroll-reveal">
+            <div class="skill-heading">• Resilience and Iteration</div>
+            <p style="margin:0; font-size:14px;">Systematically reconstructing chapters to achieve a professional standard.</p>
+        </div>
+        <div class="skill-card scroll-reveal">
+            <div class="skill-heading">• Strategic Execution</div>
+            <p style="margin:0; font-size:14px;">Managing publishing, cover design, metadata, and distribution global networks.</p>
+        </div>
+    </div>
 
-        <p>
-        ▶ Reference:
-        <a href="https://www.bennett.edu.in/aalekh/" target="_blank">Bennett University Aalekh Page</a>
-        </p>
+    <div class="story-heading scroll-reveal">The Litmus Test: National Recognition and Validation</div>
+    <p class="scroll-reveal">
+        The ultimate validation of this intellectual endeavor occurred when The Mysterious Call was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.
+    </p>
+    
+    <div class="jury-grid">
+        <div class="jury-member scroll-reveal">
+            • <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank">Dr. Ramesh Pokhriyal 'Nishank'</a> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank">Dr. Kiran Bedi (IPS)</a> – India’s legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <strong>Mr. Harjeet Khanduja</strong> – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <strong>Ms. Swapna Liddle</strong> – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <strong>Ms. Sutapa Basu</strong> – Renowned educationist, poet, and recipient of The Times of India’s prestigious AutHer Award.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <strong>Mr. Ankit Jhamb</strong> – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.
+        </div>
+        <div class="jury-member scroll-reveal">
+            • <strong>Ms. Harshali Singh</strong> – Acclaimed author, judge, poet, and recipient of the National Literary Award.
+        </div>
+    </div>
+
+    <p class="scroll-reveal" style="margin-top: 40px;">
+        To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.
+    </p>
+
+    <div class="story-heading scroll-reveal">The Forward Horizon</div>
+    <p class="scroll-reveal">
+        Ultimately, the journey of The Mysterious Call stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.
+    </p>
+
+    <div class="section-title scroll-reveal">Media & References</div>
+    <div class="links-wrapper scroll-reveal">
+        <a href="https://www.youtube.com/watch?v=IkhjX72XFAw" class="media-link" target="_blank">
+            <span class="live-pulse"></span> Watch Award Moment (YouTube Live Stream)
+        </a>
+        <a href="https://news.globalindianschool.org/noida/namit-shastry-of-giis-noida-wins-big-at-the-aalekh-2023-by-bennett-university" class="media-link" target="_blank">
+            📰 Global Indian School Official Article
+        </a>
+        <a href="https://www.bennett.edu.in/aalekh/" class="media-link" target="_blank">
+            🏛️ Bennett University Aalekh Interface Reference
+        </a>
     </div>
 
 </div>
+
+<script>
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.12
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach((el) => {
+        observer.observe(el);
+    });
+</script>
 
 </body>
 </html>
