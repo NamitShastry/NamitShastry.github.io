@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Medals and Certificates | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght=0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CORE BRAND PRESETS ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #0e171e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* ===== AMBIENT BACKDROP ===== */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 75vw;
+            height: 75vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.35) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        /* ===== STRUCTURAL CONTAINER ===== */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 60px 40px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
+        .back-button-wrapper {
+            position: absolute;
+            top: 60px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
+        }
+
+        /* ===== MASTER PAGE HEADER ===== */
+        header {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 40%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        header .subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8dbdc1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #8dbdc1;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(141, 189, 193, 0.2), transparent);
+        }
+
+        /* ===== LIST LAYOUT BLOCK SYSTEM ===== */
+        .record-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .record-card {
+            background: rgba(255, 255, 255, 0.01);
+            border-left: 2px solid rgba(141, 189, 193, 0.25);
+            padding: 12px 0 12px 24px;
+            transition: all 0.3s ease;
+        }
+
+        .record-card:hover {
+            border-left-color: #4ecdc4;
+            background: rgba(141, 189, 193, 0.02);
+            padding-left: 28px;
+        }
+
+        .record-meta-title {
+            font-size: 16.5px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .record-meta-title span {
+            color: #f7cb65; /* Elegant Amber accent for metrics/ranks */
+            font-weight: 500;
+        }
+
+        .record-desc {
+            font-size: 14.5px;
+            color: #a3b8ba;
+            font-weight: 300;
+        }
+
+        /* ===== GRID SUB-LAYOUT SYSTEM (OLYMPIADS & ACADEMICS) ===== */
+        .sub-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .panel-box {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(141, 189, 193, 0.06);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(141, 189, 193, 0.15);
+            padding-bottom: 8px;
+        }
+
+        .nested-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nested-list li {
+            font-size: 14.5px;
+            color: #dae5e6;
+            font-weight: 300;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .nested-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #8dbdc1;
+            font-weight: bold;
+        }
+
+        .nested-list li strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .olympiad-score-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 14px;
+        }
+
+        .olympiad-score-line .label {
+            color: #a3b8ba;
+            font-weight: 300;
+        }
+
+        .olympiad-score-line .value {
+            color: #f7cb65;
+            font-weight: 500;
+        }
+
+        /* ===== WORKSHOPS BADGE CLUSTER ===== */
+        .workshop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .workshop-badge {
+            background: rgba(141, 189, 193, 0.03);
+            border: 1px solid rgba(141, 189, 193, 0.08);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-size: 14.5px;
+            color: #dae5e6;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .workshop-badge strong {
+            color: #ffffff;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* ===== RESPONSIVE DESIGN VIEWPORTS ===== */
+        @media (max-width: 768px) {
+            header h1 { font-size: 32px; }
+            .back-button-wrapper { top: 20px; left: 20px; }
+            .container { padding: 20px 20px 60px; }
+            header { margin-top: 60px; }
+            .sub-grid, .workshop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-blobs"></div>
+
+<div class="container">
+
+    <div class="back-button-wrapper">
+        <a href="achievements.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+    </div>
+
+    <header>
+        <div class="subtitle">Scholastic Records & Involvements</div>
+        <h1>School Medals and Certificates</h1>
+    </header>
+
+    <div class="section-title">Academic & Subject-Specific Honors</div>
+    <div class="record-group">
+        <div class="record-card">
+            <div class="record-meta-title">Vedic Maths Champion <span>(First Position)</span></div>
+            <div class="record-desc">Won during the Maths & IT Week at Global Indian International School (Grade 10 • December 2023).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Doha Vachan Competition <span>(Third Position)</span></div>
+            <div class="record-desc">Awarded at Global Indian International School (Grade 10 • Academic Year 2023 – 24).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Budding Scientist Award</div>
+            <div class="record-desc">Recognized for top position during the Science Week Activity at Global Indian International School (Grade 10 • Academic Year 2023-24).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Board Examination Excellence</div>
+            <div class="record-desc">Honored with a Certificate of Appreciation at the Scholar's Felicitation Ceremony by Cleo County Agarwal Samaj for Excellent Performance in the Grade 10 Board Examinations (2023).</div>
+        </div>
+    </div>
+
+    <div class="section-title">Scholastic Standings By Grade</div>
+    <div class="sub-grid">
+        <div class="panel-box">
+            <h3>Grade IX Awards</h3>
+            <ul class="nested-list">
+                <li>Class Topper</li>
+                <li>Subject Topper in <strong>Mathematics</strong></li>
+                <li>Subject Topper in <strong>Information Tech. (IT)</strong></li>
+                <li>Recognized Institutional Scholar</li>
+            </ul>
+        </div>
+
+        <div class="panel-box">
+            <h3>Grade X Awards</h3>
+            <ul class="nested-list">
+                <li>Class Topper</li>
+                <li>Awarded the <strong>Global Future Ready Merit Scholarship</strong> (Full 2-Year Term: 2024 – 2026)</li>
+                <li>Subject Topper in <strong>Science</strong></li>
+                <li>Subject Topper in <strong>Hindi</strong></li>
+                <li>Recognized Institutional Scholar</li>
+            </ul>
+        </div>
+
+        <div class="panel-box" style="grid-column: span 2;">
+            <h3>Grade XI Awards</h3>
+            <div class="sub-grid" style="gap: 0;">
+                <ul class="nested-list">
+                    <li><strong>Overall Topper (Bronze Medalist)</strong></li>
+                    <li>Class Topper</li>
+                    <li>Subject Topper in <strong>Mathematics</strong></li>
+                    <li>Subject Topper in <strong>Chemistry</strong></li>
+                </ul>
+                <ul class="nested-list">
+                    <li>Subject Topper in <strong>Physical Education</strong></li>
+                    <li>Recognized Institutional All-Rounder</li>
+                    <li>Recognized Institutional Scholar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">Olympiad Performance Profiles</div>
+    <div class="sub-grid">
+        <div class="panel-box">
+            <h3>Grade 8</h3>
+            <div style="margin-bottom: 12px;">
+                <strong style="color:#ffffff; font-size:14px; display:block; margin-bottom:4px;">NSO (National Science Olympiad)</strong>
+                <div class="olympiad-score-line"><span class="label">Zonal Rank</span><span class="value">24</span></div>
+            </div>
+            <div>
+                <strong style="color:#ffffff; font-size:14px; display:block; margin-bottom:4px;">IMO (International Mathematics Olympiad)</strong>
+                <div class="olympiad-score-line"><span class="label">School Rank</span><span class="value">2</span></div>
+            </div>
+        </div>
+
+        <div class="panel-box">
+            <h3>Grade 10</h3>
+            <div>
+                <strong style="color:#ffffff; font-size:14px; display:block; margin-bottom:4px;">IMO (International Mathematics Olympiad)</strong>
+                <div class="olympiad-score-line"><span class="label">Level 2 Zonal Rank</span><span class="value">32</span></div>
+                <div class="olympiad-score-line"><span class="label">Level 2 International Rank</span><span class="value">540</span></div>
+                <div class="olympiad-score-line"><span class="label">Level 1 School Rank</span><span class="value">1</span></div>
+                <div class="olympiad-score-line"><span class="label">Level 1 Zonal Rank</span><span class="value">244</span></div>
+                <div class="olympiad-score-line"><span class="label">Level 1 International Rank</span><span class="value">832</span></div>
+            </div>
+        </div>
+
+        <div class="panel-box" style="grid-column: span 2;">
+            <h3>Grade 9</h3>
+            <div class="sub-grid">
+                <div>
+                    <strong style="color:#ffffff; font-size:14px; display:block; margin-bottom:4px;">NSO (National Science Olympiad)</strong>
+                    <div class="olympiad-score-line"><span class="label">Level 1 School Rank</span><span class="value">1</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 1 Zonal Rank</span><span class="value">23</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 1 International Rank</span><span class="value">36</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 2 Zonal Rank</span><span class="value">128</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 2 International Rank</span><span class="value">1541</span></div>
+                </div>
+                <div>
+                    <strong style="color:#ffffff; font-size:14px; display:block; margin-bottom:4px;">IMO (International Mathematics Olympiad)</strong>
+                    <div class="olympiad-score-line"><span class="label">Level 1 School Rank</span><span class="value">1</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 1 Zonal Rank</span><span class="value">221</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 1 International Rank</span><span class="value">498</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 2 Zonal Rank</span><span class="value">148</span></div>
+                    <div class="olympiad-score-line"><span class="label">Level 2 International Rank</span><span class="value">1290</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">Sports & Extracurricular Achievements</div>
+    <div class="record-group">
+        <div class="record-card">
+            <div class="record-meta-title">Annual Sports Day Chess Champion <span>(Best Player)</span></div>
+            <div class="record-desc">Earned the definitive title of Best Player in Chess during Global Indian International School Noida's Annual Sports Festival - Synergy (December 2023).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Kaabil Kids Rapid Chess Tournament <span>(First Position)</span></div>
+            <div class="record-desc">Secured first position competing within the 1500 – 1599 category bracket (January 25, 2026).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">The Chess Conquerors' Cup 2025</div>
+            <div class="record-desc">Double-ranked milestone: Finished <strong>2nd Rank</strong> across the Under-16 Division and <strong>13th Rank</strong> overall within the Open Category (January 2025).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Cleo Indoor Championship ver 1.0 <span>(First Position)</span></div>
+            <div class="record-desc">Finished in first place overall during the competitive winter tournament league (December 2024).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">GIIS Intramural Chess Competition <span>(First Place)</span></div>
+            <div class="record-desc">Finished in first place standing within the internal institutional tournament circuit at GIIS Noida.</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Intramural Basketball Tournament Administration</div>
+            <div class="record-desc">Successfully headed the executive student team responsible for organizing and managing the Inter-class Basketball League competition layout at GIIS Noida (March 2025).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Athletic Track Event <span>(Second Place)</span></div>
+            <div class="record-desc">Won second place honors competing inside the competitive Tug of War division.</div>
+        </div>
+    </div>
+
+    <div class="section-title">Community Service, Leadership, & Workshops</div>
+    <div class="record-group">
+        <div class="record-card">
+            <div class="record-meta-title">Executive Student Council Leadership</div>
+            <div class="record-desc">Served high-level leadership positions across multiple academic tenures: <strong>Head Boy</strong> (2025 – 26), <strong>Vice Head Boy</strong> (2024 – 25), <strong>Interact Club President</strong> (2024 – 25), and <strong>Director of the Outreach Club</strong> (2023 – 24).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Interact Club Distinction Badge</div>
+            <div class="record-desc">Formally awarded institutional recognition honors for performance and social leadership metrics throughout the 2024 - 25 operational year.</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Tarkshetra Youth Parliament / AIPPM Representation</div>
+            <div class="record-desc">Commended as an active AIPPM Delegate (representing State Minister Shri Manohar Lal Khattar) debating the Uniform Civil Code legislative layout; organized by Delhi Public School, GBN (August 2022).</div>
+        </div>
+
+        <div class="record-card">
+            <div class="record-meta-title">Share & Care Social Drive Commitment</div>
+            <div class="record-desc">Awarded a Certificate of Commitment honoring active hands-on field participation during the community social service relief drives at GIIS Noida.</div>
+        </div>
+    </div>
+
+    <div class="section-title">Professional Seminars & Skill Development Panels</div>
+    <div class="workshop-grid">
+        <div class="workshop-badge">
+            <strong>UMANG International Conclave</strong>
+            Participated in the specialized Rotary Operations Training Program for young incoming interact leaders hosted at Mayoor School (2023).
+        </div>
+        <div class="workshop-badge">
+            <strong>Financial Literacy Summit</strong>
+            Economic management and structural personal finance modules held at Global Indian International School.
+        </div>
+        <div class="workshop-badge">
+            <strong>Critical Thinking & Strategy</strong>
+            Advanced analysis, strategic decision structures, and conceptual problem-solving workshops.
+        </div>
+        <div class="workshop-badge">
+            <strong>Cyber Security & Protection</strong>
+            Digital risk mitigation, operational threat safety frameworks, and networks encryption metrics.
+        </div>
+        <div class="workshop-badge">
+            <strong>Global University Fair</strong>
+            Advanced academic path-mapping and international placements matching via the Global Career Counselling Cell.
+        </div>
+        <div class="workshop-badge">
+            <strong>Mental Health & Stress Management</strong>
+            Dual wellness certifications covering stress mitigation tracking and mental state balance frameworks.
+        </div>
+        <div class="workshop-badge" style="grid-column: span 2;">
+            <strong>Adolescence Growth & Career Planning Workshops</strong>
+            Strategic counseling modules covering developmental behavioral dynamics and future academic trajectory optimization.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
