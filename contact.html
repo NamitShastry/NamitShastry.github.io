@@ -1,75 +1,307 @@
+<a href="leadership.html">Leadership</a>
+<a href="contact.html">Contact</a> ```
+
+---
+
+### 3. The Code for `contact.html`
+
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Contact - Namit Shastry</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        /* ===== MODERN DESIGN RESET & ORGANIC AMBIENT CANVAS ===== */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #0e171e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .nav {
-            background: #111;
-            padding: 15px;
-            text-align: center;
+        /* ===== SYNAPSE-INSPIRED FLUID GRADIENT BLOBS ===== */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
         }
 
-        .nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 65vw;
+            height: 65vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.45) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%;
+            filter: blur(70px);
+            animation: wave-movement 20s infinite alternate ease-in-out;
         }
 
-        .nav a:hover {
-            color: #f5c542;
+        .bg-blobs::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(53, 99, 101, 0.4) 0%, rgba(14, 23, 30, 0) 70%);
+            border-radius: 50% 40% 55% 45% / 40% 60% 40% 60%;
+            filter: blur(80px);
+            animation: wave-movement 16s infinite alternate-reverse ease-in-out;
         }
 
+        /* ===== FIXED CONTAINER FRAME ===== */
         .container {
-            padding: 40px;
+            width: 100%;
+            max-width: 540px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== ACTION BACK BUTTON ARROW ===== */
+        .back-button-wrapper {
+            position: absolute;
+            top: -70px;
+            left: 30px;
+            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 24px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
+        }
+
+        /* ===== PREMIUM GLASSMORPHISM CARD ===== */
+        .contact-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            border-radius: 28px;
+            padding: 45px 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        /* ===== PROFILE IDENTITY ===== */
+        .profile-initial {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #356365 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(78, 142, 147, 0.3);
         }
 
         h1 {
-            color: #f5c542;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
 
-        .card {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8dbdc1;
+            margin-bottom: 35px;
+            font-weight: 500;
         }
 
-        .email {
-            color: #f5c542;
-            font-weight: bold;
+        /* ===== INTERACTIVE DATA ROWS ===== */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(141, 189, 193, 0.06);
+            padding: 16px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #dae5e6;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .info-item:hover {
+            background: rgba(141, 189, 193, 0.05);
+            border-color: rgba(141, 189, 193, 0.3);
+            transform: scale(1.02);
+            color: #ffffff;
+        }
+
+        .icon {
+            font-size: 18px;
+            margin-right: 18px;
+            width: 24px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .val {
+            font-size: 15.5px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== TOOLTIP UTILITY ===== */
+        .info-item::after {
+            content: 'Click to copy';
+            position: absolute;
+            right: 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8dbdc1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-item:hover::after {
+            opacity: 0.6;
+        }
+
+        /* ===== KEYFRAMES ===== */
+        @keyframes wave-movement {
+            0% { border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%; transform: translate(0, 0) rotate(0deg); }
+            50% { border-radius: 60% 40% 45% 55% / 50% 55% 45% 50%; transform: translate(-20px, 15px) rotate(30deg); }
+            100% { border-radius: 40% 60% 50% 50% / 40% 45% 55% 60%; transform: translate(10px, -10px) rotate(60deg); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .contact-card { padding: 35px 25px; }
+            h1 { font-size: 30px; }
+            .back-button-wrapper { top: -60px; left: 15px; }
         }
     </style>
 </head>
-
 <body>
 
-<div class="nav">
-    <a href="/index.html">Home</a>
-    <a href="/research.html">Research</a>
-    <a href="/chess.html">Chess</a>
-    <a href="/articles.html">Articles</a>
-    <a href="/achievements/aalekh-award.html">Achievements</a>
-    <a href="/contact.html">Contact</a>
-</div>
+<div class="bg-blobs"></div>
 
 <div class="container">
 
-    <h1>Contact</h1>
+    <div class="back-button-wrapper">
+        <button onclick="history.back()" class="back-arrow-btn" aria-label="Go Back">←</button>
+    </div>
 
-    <div class="card">
-        <p>You can reach me for academic, research, or collaboration purposes.</p>
-        <p>Email: <span class="email">your-email@example.com</span></p>
+    <div class="contact-card">
+        <div class="profile-initial">NS</div>
+        <h1>Namit Shastry</h1>
+        <div class="subtitle">Get In Touch</div>
+
+        <div class="info-list">
+            <div class="info-item" onclick="copyData('namitshastry@gmail.com', this)">
+                <span class="icon">✉</span>
+                <span class="val">namitshastry@gmail.com</span>
+            </div>
+
+            <div class="info-item" onclick="copyData('+91 9819580472', this)">
+                <span class="icon">📞</span>
+                <span class="val">+91 9819580472</span>
+            </div>
+        </div>
     </div>
 
 </div>
+
+<script>
+    function copyData(text, element) {
+        navigator.clipboard.writeText(text.replace('+91 ', '')).then(() => {
+            const originalText = element.style.getPropertyValue('--tooltip') || 'Click to copy';
+            
+            // Temporary dynamic response on success copy hook
+            element.setAttribute('style', '--tooltip: "Copied!"');
+            
+            // Create an alternative style change for visual pop feedback
+            const textNode = element.querySelector('.val');
+            const originalColor = textNode.style.color;
+            textNode.style.color = '#4ecdc4';
+            
+            setTimeout(() => {
+                element.removeAttribute('style');
+                textNode.style.color = originalColor;
+            }, 1200);
+        });
+    }
+</script>
 
 </body>
 </html>
