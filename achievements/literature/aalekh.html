@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== MODERN DESIGN RESET & VIBRANT AMBIENT CANVAS ===== */
+        /* ===== MODERN DESIGN RESET & ORGANIC AMBIENT CANVAS ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -17,93 +17,119 @@
         }
         
         body {
-            /* Create the complex, multi-layer animated rainbow gradient */
-            background: linear-gradient(135deg, #1c1c2b, #121212);
-            position: relative;
-            /* Update to brilliant white for high contrast on a moving colorful background */
+            /* Main deep background tone matching the reference theme dark zones */
+            background-color: #0e171e;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             line-height: 1.8;
             overflow-x: hidden;
+            position: relative;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Pure CSS Animated Rainbow Overlay */
-        body::before {
-            content: '';
+        /* ===== SYNAPSE-INSPIRED FLUID GRADIENT BLOBS ===== */
+        .bg-blobs {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #3d2f2f, #2b3a3d, #2f3d35, #3d3b2f);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
-            filter: blur(100px);
-            opacity: 0.8;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        /* Fluid Blob 1 - Top Right Teal Wave */
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.45) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%;
+            filter: blur(60px);
+            animation: wave-movement 22s infinite alternate ease-in-out;
+        }
+
+        /* Fluid Blob 2 - Bottom Left Soft Glow */
+        .bg-blobs::after {
+            content: '';
+            position: absolute;
+            bottom: -15%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(53, 99, 101, 0.35) 0%, rgba(14, 23, 30, 0) 70%);
+            border-radius: 50% 40% 55% 45% / 40% 60% 40% 60%;
+            filter: blur(80px);
+            animation: wave-movement 18s infinite alternate-reverse ease-in-out;
+        }
+
+        /* Extra Mid-screen soft lighting element */
+        .bg-glow-center {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 50vh;
+            background: radial-gradient(ellipse at center, rgba(141, 189, 193, 0.06) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
             max-width: 960px;
             margin: auto;
             padding: 100px 40px;
+            position: relative;
+            z-index: 1;
         }
 
         /* ===== KINETIC MASTER HEADER ===== */
         h1 {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 56px;
+            font-size: 58px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            /* Brilliant Metallic White/Gold Gradient */
-            background: linear-gradient(135deg, #ffffff 0%, #ffffff 60%, #b58a15 100%);
+            /* Premium clean contrast typography styled after high-end consulting designs */
+            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 60px;
             animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* ===== BENTO GLASS GRID WITH FLUID POP ===== */
-        .images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 70px;
-        }
-
-        .img-wrapper {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            /* High contrast bento grid boxes */
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            aspect-ratio: 4/3;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-        }
-
-        .images img {
+        /* ===== REFINED ADVANCED COLLAGE/MESH INTERACTIVE FRAME ===== */
+        .mesh-container {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            filter: grayscale(20%);
+            margin-bottom: 70px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* High-End Hover Elevation Mechanics */
-        .img-wrapper:hover {
-            transform: translateY(-8px) scale(1.02);
-            /* Soft Amber Glow on hover */
-            border-color: rgba(245, 197, 66, 0.4);
-            box-shadow: 0 20px 40px rgba(245, 197, 66, 0.1);
+        .mesh-graphic {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .img-wrapper:hover img {
-            transform: scale(1.08);
-            filter: grayscale(0%);
+        .mesh-container:hover {
+            transform: scale(1.01) translateY(-6px);
+            border-color: rgba(141, 189, 193, 0.4);
+            box-shadow: 0 50px 90px rgba(78, 142, 147, 0.2);
+        }
+
+        .mesh-container:hover .mesh-graphic {
+            transform: scale(1.02);
         }
 
         /* ===== SECTION HEADER SEPARATORS ===== */
@@ -113,8 +139,7 @@
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 3px;
-            /* Use vibrant amber for clear section markers */
-            color: #f5c542;
+            color: #8dbdc1;
             margin-top: 80px;
             margin-bottom: 24px;
             display: flex;
@@ -126,23 +151,22 @@
             content: '';
             flex: 1;
             height: 1px;
-            /* Rainbow shimmer gradient line separator */
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #f5c542, transparent);
+            background: linear-gradient(90deg, rgba(141, 189, 193, 0.3), transparent);
         }
 
         /* ===== EDITORIAL TYPOGRAPHY BUILD ===== */
         p {
-            color: #ffffff;
-            font-size: 16px;
+            color: #dae5e6;
+            font-size: 16.5px;
             margin-bottom: 30px;
             text-align: justify;
+            font-weight: 300;
         }
 
         .story-heading {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 600;
-            /* Sharp white headings for depth */
             color: #ffffff;
             margin-top: 60px;
             margin-bottom: 20px;
@@ -157,25 +181,25 @@
         }
 
         .skill-card {
-            /* High-contrast bento card background */
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(141, 189, 193, 0.08);
             padding: 30px;
-            border-radius: 16px;
+            border-radius: 20px;
             transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
         }
 
         .skill-card:hover {
-            background: rgba(245, 197, 66, 0.02);
-            border-color: rgba(245, 197, 66, 0.2);
-            transform: translateY(-3px);
+            background: rgba(141, 189, 193, 0.04);
+            border-color: rgba(141, 189, 193, 0.3);
+            transform: translateY(-4px);
         }
 
         .skill-heading {
             font-family: 'Playfair Display', serif;
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 600;
-            color: #f5c542;
+            color: #8dbdc1;
             margin-bottom: 12px;
         }
 
@@ -188,27 +212,26 @@
         }
 
         .jury-member {
-            /* High-contrast list background */
             background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(141, 189, 193, 0.05);
             padding: 24px;
-            border-radius: 14px;
-            font-size: 15px;
-            color: #ffffff;
+            border-radius: 16px;
+            font-size: 15.5px;
+            color: #cedee0;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .jury-member:hover {
             background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(141, 189, 193, 0.25);
         }
 
         .jury-member a {
-            color: #f5c542;
+            color: #8dbdc1;
             text-decoration: none;
             font-weight: 600;
-            border-bottom: 1px dashed rgba(245, 197, 66, 0.4);
+            border-bottom: 1px dashed rgba(141, 189, 193, 0.4);
             transition: all 0.3s ease;
         }
 
@@ -228,41 +251,40 @@
         .media-link {
             display: flex;
             align-items: center;
-            /* Industrial Link Designs with clean white border */
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 18px 24px;
-            border-radius: 12px;
+            border: 1px solid rgba(141, 189, 193, 0.08);
+            padding: 20px 26px;
+            border-radius: 16px;
             color: #ffffff;
             text-decoration: none;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 15.5px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .media-link:hover {
-            background: rgba(245, 197, 66, 0.05);
-            border-color: rgba(245, 197, 66, 0.3);
+            background: rgba(141, 189, 193, 0.08);
+            border-color: rgba(141, 189, 193, 0.4);
             transform: translateX(6px);
         }
 
-        /* Active Signal Pulse Animation Indicator */
         .live-pulse {
             width: 8px;
             height: 8px;
-            background-color: #ff4a4a;
+            background-color: #4ecdc4;
             border-radius: 50%;
             margin-right: 12px;
             display: inline-block;
-            box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7);
+            box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7);
             animation: pulse 1.6s infinite;
         }
 
-        /* ===== DYNAMIC INTERSECTION OBSERVER ANIMATION CLASSES ===== */
+        /* ===== DYNAMIC INTERSECTION OBSERVER ANIMATION SYSTEM ===== */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .scroll-reveal.active {
@@ -270,10 +292,11 @@
             transform: translateY(0);
         }
 
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* ===== KEYFRAME RHYTHMS ===== */
+        @keyframes wave-movement {
+            0% { border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%; transform: translate(0, 0) rotate(0deg); }
+            50% { border-radius: 60% 40% 45% 55% / 50% 55% 45% 50%; transform: translate(-40px, 30px) rotate(60deg); }
+            100% { border-radius: 40% 60% 50% 50% / 40% 45% 55% 60%; transform: translate(20px, -20px) rotate(120deg); }
         }
 
         @keyframes fadeInDown {
@@ -282,13 +305,13 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 74, 74, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 74, 74, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(78, 142, 147, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0); }
         }
 
         @media (max-width: 768px) {
-            .images, .skill-container { grid-template-columns: 1fr; }
+            .skill-container { grid-template-columns: 1fr; }
             h1 { font-size: 38px; }
             .container { padding: 60px 20px; }
         }
@@ -296,17 +319,15 @@
 </head>
 <body>
 
+<div class="bg-blobs"></div>
+<div class="bg-glow-center"></div>
+
 <div class="container">
 
     <h1>Aalekh Award</h1>
 
-    <div class="images scroll-reveal">
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 1"></div>
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 2"></div>
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 3"></div>
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 4"></div>
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 5"></div>
-        <div class="img-wrapper"><img src="https://via.placeholder.com/400x300" alt="Aalekh Ceremony 6"></div>
+    <div class="mesh-container scroll-reveal">
+        <img src="aalekh-mesh.png" alt="Aalekh Award Interactive Mosaic" class="mesh-graphic">
     </div>
 
     <div class="section-title scroll-reveal">Summary</div>
@@ -318,7 +339,7 @@
     
     <div class="story-heading scroll-reveal">The Genesis of a Precocious Enterprise</div>
     <p class="scroll-reveal">
-        At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, The Mysterious Call. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.
+        At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, The Mysterious Call. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on what traditional benchmarks expect before higher education.
     </p>
 
     <div class="story-heading scroll-reveal">Anatomy of the Narrative: Psychological Depth and Period Realism</div>
