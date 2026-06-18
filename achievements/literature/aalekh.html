@@ -17,7 +17,6 @@
         }
         
         body {
-            /* Main deep background tone matching the reference theme dark zones */
             background-color: #0e171e;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
@@ -83,9 +82,39 @@
         .container {
             max-width: 960px;
             margin: auto;
-            padding: 100px 40px;
+            padding: 40px 40px 100px;
             position: relative;
             z-index: 1;
+        }
+
+        /* ===== ACTION BACK BUTTON ARROW ===== */
+        .back-button-wrapper {
+            margin-bottom: 30px;
+            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 24px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
         }
 
         /* ===== KINETIC MASTER HEADER ===== */
@@ -95,7 +124,6 @@
             font-size: 58px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            /* Premium clean contrast typography styled after high-end consulting designs */
             background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -313,7 +341,7 @@
         @media (max-width: 768px) {
             .skill-container { grid-template-columns: 1fr; }
             h1 { font-size: 38px; }
-            .container { padding: 60px 20px; }
+            .container { padding: 20px 20px 60px; }
         }
     </style>
 </head>
@@ -323,6 +351,10 @@
 <div class="bg-glow-center"></div>
 
 <div class="container">
+
+    <div class="back-button-wrapper">
+        <button onclick="history.back()" class="back-arrow-btn" aria-label="Go Back">←</button>
+    </div>
 
     <h1>Aalekh Award</h1>
 
