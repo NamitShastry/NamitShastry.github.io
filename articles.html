@@ -1,68 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Articles - Namit Shastry</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles | Namit Shastry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
 
     <style>
-        body {
+        /* ===== CORE BRAND RESET ===== */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
+            padding: 0;
         }
 
+        body {
+            background-color: #0e171e;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== SYNAPSE AMBIENT BACKDROP WITH SUBTLE MOVEMENT ===== */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+        }
+
+        .bg-blobs::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(78, 142, 147, 0.25) 0%, rgba(39, 76, 85, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse-ambient 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-ambient {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-5%, 5%); }
+        }
+
+        /* ===== SYSTEM ULTRA-MINIMAL NAVIGATION BAR ===== */
         .nav {
-            background: #111;
-            padding: 15px;
+            background: rgba(11, 17, 22, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(141, 189, 193, 0.08);
+            padding: 20px;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
         .nav a {
-            color: white;
-            margin: 0 15px;
+            color: #a3b8ba;
+            margin: 0 18px;
             text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
-        .nav a:hover {
-            color: #f5c542;
+        .nav a:hover, .nav a.active {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(141, 189, 193, 0.4);
         }
 
-        .container {
+        /* ===== HERO CONTAINER ===== */
+        .coming-soon-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
-        h1 {
-            color: #f5c542;
+        /* ===== DESIGNER "COMING SOON" TEXT ===== */
+        .coming-soon-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(48px, 8vw, 92px); /* Scales perfectly across desktops, tablets, and mobile phones */
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: 4px;
+            background: linear-gradient(180deg, #ffffff 20%, #8dbdc1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            filter: drop-shadow(0px 4px 20px rgba(78, 142, 147, 0.15));
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .card {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+        /* ===== ARCHITECTURAL DIVIDER LINE ===== */
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: expand-line 1.5s ease forward 0.4s;
+            animation-fill-mode: forwards;
+        }
+
+        /* ===== METRIC DESCRIPTIVE SUBTEXT ===== */
+        .coming-soon-sub {
+            font-size: clamp(14px, 2vw, 17px);
+            font-weight: 200;
+            letter-spacing: 4px;
+            color: #dae5e6;
+            text-transform: uppercase;
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+        }
+
+        .coming-soon-sub span {
+            font-weight: 400;
+            color: #4ecdc4;
+        }
+
+        /* ===== LAYOUT ENGINE ANIMATIONS ===== */
+        @keyframes fade-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes expand-line {
+            to {
+                opacity: 1;
+                width: 180px;
+            }
+        }
+
+        /* ===== RESPONSIVE FIXES ===== */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 15px 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .nav a {
+                margin: 0 8px;
+                font-size: 11px;
+            }
+            .coming-soon-container {
+                padding: 20px;
+            }
         }
     </style>
 </head>
-
 <body>
 
+<div class="bg-blobs"></div>
+
 <div class="nav">
-    <a href="/index.html">Home</a>
-    <a href="/research.html">Research</a>
-    <a href="/chess.html">Chess</a>
-    <a href="/articles.html">Articles</a>
-    <a href="/achievements/aalekh-award.html">Achievements</a>
-    <a href="/contact.html">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="chess.html">Chess</a>
+    <a href="articles.html" class="active">Articles</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
 </div>
 
-<div class="container">
-
-    <h1>Articles</h1>
-
-    <div class="card">
-        <p>Engineering, Business, Economics, and educational articles will be published here.</p>
-    </div>
-
+<div class="coming-soon-container">
+    <h1 class="coming-soon-title">Coming Soon</h1>
+    <div class="divider"></div>
+    <p class="coming-soon-sub">Engineering, Business, Economics, and <span>Educational Analysis</span></p>
 </div>
 
 </body>
