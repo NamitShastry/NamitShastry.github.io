@@ -292,10 +292,10 @@
         }
 
         .dock-link.lichess:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: #ffffff;
-            color: #ffffff;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            background: rgba(213, 163, 62, 0.15);
+            border-color: #d5a33e;
+            color: #d5a33e;
+            box-shadow: 0 0 20px rgba(213, 163, 62, 0.3);
             transform: translateY(-4px);
         }
 
@@ -308,8 +308,8 @@
         }
 
         .dock-link svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: currentColor;
         }
 
@@ -401,11 +401,13 @@
 
     <div class="social-dock">
         <a href="https://www.chess.com/member/Namit_2035" target="_blank" class="dock-link chess-com" title="Chess.com Profile">
-            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.2 16.2c-.3-4.5-3-8.3-7-9.9-.6-.2-1-.8-1-1.4V1.8c0-.6-.5-1.2-1.2-1.2h-4c-.6 0-1.2.5-1.2 1.2v3.1c0 .6-.4 1.2-1 1.4-4 1.6-6.7 5.4-7 9.9-.1.6.4 1.2 1 1.2h19.4c.7 0 1.2-.6 1-1.2zM12 24c6.6 0 12-5.4 12-12H0c0 6.6 5.4 12 12 12z"/></svg>
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.68 0H4.35C3.31 0 2.41.67 2.13 1.67L.07 9.04c-.31 1.13.34 2.29 1.45 2.59l4.5 1.2c.62.17 1.08.7 1.14 1.34L8.12 22.3c.12 1.12 1.12 1.7 2.13 1.7h3.33c1.01 0 2.01-.58 2.13-1.7l.96-8.13c.06-.64.52-1.17 1.14-1.34l4.5-1.2c1.11-.3 1.76-1.46 1.45-2.59L21.87 1.67C21.59.67 20.69 0 19.65 0h-5.97zm.4 5.08c1.37 0 2.47 1.11 2.47 2.48 0 1.37-1.1 2.48-2.47 2.48s-2.48-1.11-2.48-2.48c0-1.37 1.11-2.48 2.48-2.48zm-4.16 0c1.37 0 2.48 1.11 2.48 2.48 0 1.37-1.11 2.48-2.48 2.48S7.44 8.93 7.44 7.56c0-1.37 1.11-2.48 2.48-2.48z"/></svg>
         </a>
+        
         <a href="https://lichess.org/@/Namit_1700" target="_blank" class="dock-link lichess" title="Lichess Profile">
-            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2 22h20v-2H2v2zm18-4V8h-3V5.5c0-.83-.67-1.5-1.5-1.5h-7C7.67 4 7 4.67 7 5.5V8H4v10h16zM9 6h6v2H9V6zm-3 4h12v6H6v-6z"/></svg>
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1 22h22v2H1zm11.23-22c-2.31 0-4.39 1.48-5.12 3.65l-1.9 5.67h3.32l.85-2.55c.23-.7.9-.17.9.17v5.33H6.8l-1.1 3.33h12.56l-1.1-3.33h-3.48V9.27c0-.34.67-.87.9-.17l.85 2.55h3.32l-1.9-5.67C16.62 1.48 14.54 0 12.23 0z"/></svg>
         </a>
+        
         <a href="https://www.linkedin.com/in/namit-shastry-925540417/" target="_blank" class="dock-link linkedin" title="LinkedIn Profile">
             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
@@ -415,7 +417,6 @@
 
 <script>
     function copyData(text, element) {
-        // Strip country code prefix when copying the phone string if preferred
         const cleanText = text.replace('+91 ', '');
         navigator.clipboard.writeText(cleanText).then(() => {
             const tooltip = element.querySelector('.tooltip');
