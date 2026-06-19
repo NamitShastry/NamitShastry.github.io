@@ -3,481 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aalekh Award | Namit Shastry</title>
+    <title>Achievements | Namit Shastry</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ===== MODERN DESIGN RESET & ORGANIC AMBIENT CANVAS ===== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
-            background-color: #0e171e;
+            background-color: #040812;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
-            line-height: 1.8;
-            overflow-x: hidden;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* ===== SYNAPSE-INSPIRED FLUID GRADIENT BLOBS ===== */
-        .bg-blobs {
+        /* ===== BACKGROUND SYSTEM ===== */
+        .bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
+            background: linear-gradient(180deg, rgba(4, 8, 18, 0.85) 0%, rgba(11, 21, 40, 0.9) 100%), 
+                        url('city-bg.png') no-repeat center center;
+            background-size: cover;
         }
 
-        /* Fluid Blob 1 - Top Right Teal Wave */
-        .bg-blobs::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 70vw;
-            height: 70vw;
-            background: radial-gradient(circle, rgba(78, 142, 147, 0.45) 0%, rgba(39, 76, 85, 0) 70%);
-            border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%;
-            filter: blur(60px);
-            animation: wave-movement 22s infinite alternate ease-in-out;
-        }
-
-        /* Fluid Blob 2 - Bottom Left Soft Glow */
-        .bg-blobs::after {
-            content: '';
-            position: absolute;
-            bottom: -15%;
-            left: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(53, 99, 101, 0.35) 0%, rgba(14, 23, 30, 0) 70%);
-            border-radius: 50% 40% 55% 45% / 40% 60% 40% 60%;
-            filter: blur(80px);
-            animation: wave-movement 18s infinite alternate-reverse ease-in-out;
-        }
-
-        /* Extra Mid-screen soft lighting element */
-        .bg-glow-center {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 50vh;
-            background: radial-gradient(ellipse at center, rgba(141, 189, 193, 0.06) 0%, transparent 60%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: auto;
-            padding: 40px 40px 100px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== ACTION BACK BUTTON ARROW ===== */
-        .back-button-wrapper {
-            margin-bottom: 30px;
-            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .back-arrow-btn {
-            background: none;
-            border: none;
-            color: #8dbdc1;
-            font-size: 24px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
+        /* ===== NAVIGATION BAR ===== */
+        .top-nav {
+            display: flex;
             justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(141, 189, 193, 0.15);
-            background: rgba(255, 255, 255, 0.01);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            align-items: center;
+            padding: 25px 20px;
+            gap: 30px;
+            z-index: 10;
         }
 
-        .back-arrow-btn:hover {
-            color: #ffffff;
-            border-color: rgba(141, 189, 193, 0.4);
-            background: rgba(141, 189, 193, 0.08);
-            transform: translateX(-4px);
+        .top-nav a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
-        /* ===== KINETIC MASTER HEADER ===== */
-        h1 {
-            text-align: center;
+        .top-nav a:hover, .top-nav a.active {
+            color: #f5c542;
+            text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
+        }
+
+        /* ===== MAIN WORKSPACE CONTROLLER ===== */
+        .content-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: auto;
+            padding: 20px 40px 60px;
+            flex: 1;
+        }
+
+        /* HERO BANNER FOR AALEKH AWARD */
+        .award-hero-banner {
+            width: 100%;
+            height: 360px;
+            border-radius: 24px;
+            border: 2px solid #f5c542;
+            box-shadow: 0 0 35px rgba(245, 197, 66, 0.3);
+            overflow: hidden;
+            background-color: #0c1424;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .award-hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .page-title {
             font-family: 'Playfair Display', serif;
-            font-size: 58px;
+            font-size: 46px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 30%, #c4dedf 100%);
+            background: linear-gradient(135deg, #ffffff 50%, #f5c542 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 60px;
-            animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-bottom: 10px;
         }
 
-        /* ===== REFINED ADVANCED COLLAGE/MESH INTERACTIVE FRAME ===== */
-        .mesh-container {
-            width: 100%;
-            margin-bottom: 70px;
-            border-radius: 24px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(141, 189, 193, 0.15);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .mesh-graphic {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .mesh-container:hover {
-            transform: scale(1.01) translateY(-6px);
-            border-color: rgba(141, 189, 193, 0.4);
-            box-shadow: 0 50px 90px rgba(78, 142, 147, 0.2);
-        }
-
-        .mesh-container:hover .mesh-graphic {
-            transform: scale(1.02);
-        }
-
-        /* ===== SECTION HEADER SEPARATORS ===== */
-        .section-title {
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: #8dbdc1;
-            margin-top: 80px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(141, 189, 193, 0.3), transparent);
-        }
-
-        /* ===== EDITORIAL TYPOGRAPHY BUILD ===== */
-        p {
-            color: #dae5e6;
-            font-size: 16.5px;
+        .gold-divider {
+            width: 60px;
+            height: 2px;
+            background: #f5c542;
+            box-shadow: 0 0 8px #f5c542;
             margin-bottom: 30px;
-            text-align: justify;
-            font-weight: 300;
         }
 
-        .story-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 34px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 60px;
-            margin-bottom: 20px;
-            letter-spacing: -0.3px;
-        }
-
-        .skill-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin: 40px 0;
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(141, 189, 193, 0.08);
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .skill-card:hover {
-            background: rgba(141, 189, 193, 0.04);
-            border-color: rgba(141, 189, 193, 0.3);
-            transform: translateY(-4px);
-        }
-
-        .skill-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 21px;
-            font-weight: 600;
-            color: #8dbdc1;
-            margin-bottom: 12px;
-        }
-
-        /* ===== THE JURY INTERACTIVE SHOWCASE ===== */
-        .jury-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 16px;
-            margin-top: 30px;
-        }
-
-        .jury-member {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(141, 189, 193, 0.05);
-            padding: 24px;
-            border-radius: 16px;
-            font-size: 15.5px;
-            color: #cedee0;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .jury-member:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(141, 189, 193, 0.25);
-        }
-
-        .jury-member a {
-            color: #8dbdc1;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px dashed rgba(141, 189, 193, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .jury-member a:hover {
-            color: #ffffff;
-            border-bottom-color: #ffffff;
-        }
-
-        /* ===== MODERN FOOTER LINKS & LIVE PULSE ===== */
-        .links-wrapper {
-            margin-top: 40px;
+        /* ACCOMPLISHMENTS DISPLAY GLASS CARD */
+        .achievement-feed {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .media-link {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(141, 189, 193, 0.08);
-            padding: 20px 26px;
+        .achievement-item-card {
+            background: rgba(255, 245, 220, 0.02);
+            border: 1px solid rgba(245, 197, 66, 0.15);
             border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .achievement-item-card:hover {
+            transform: translateY(-3px);
+            border-color: #f5c542;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .achievement-icon-box {
+            font-size: 36px;
+            color: #f5c542;
+            text-shadow: 0 0 10px rgba(245, 197, 66, 0.4);
+        }
+
+        .achievement-details h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
             color: #ffffff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15.5px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            margin-bottom: 6px;
         }
 
-        .media-link:hover {
-            background: rgba(141, 189, 193, 0.08);
-            border-color: rgba(141, 189, 193, 0.4);
-            transform: translateX(6px);
-        }
-
-        .live-pulse {
-            width: 8px;
-            height: 8px;
-            background-color: #4ecdc4;
-            border-radius: 50%;
-            margin-right: 12px;
-            display: inline-block;
-            box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7);
-            animation: pulse 1.6s infinite;
-        }
-
-        /* ===== DYNAMIC INTERSECTION OBSERVER ANIMATION SYSTEM ===== */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== KEYFRAME RHYTHMS ===== */
-        @keyframes wave-movement {
-            0% { border-radius: 43% 57% 62% 38% / 45% 40% 60% 55%; transform: translate(0, 0) rotate(0deg); }
-            50% { border-radius: 60% 40% 45% 55% / 50% 55% 45% 50%; transform: translate(-40px, 30px) rotate(60deg); }
-            100% { border-radius: 40% 60% 50% 50% / 40% 45% 55% 60%; transform: translate(20px, -20px) rotate(120deg); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(78, 142, 147, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 142, 147, 0); }
-        }
-
-        @media (max-width: 768px) {
-            .skill-container { grid-template-columns: 1fr; }
-            h1 { font-size: 38px; }
-            .container { padding: 20px 20px 60px; }
+        .achievement-details p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
-<div class="bg-blobs"></div>
-<div class="bg-glow-center"></div>
+    <div class="bg-canvas"></div>
 
-<div class="container">
+    <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="index.html">About</a>
+        <a href="research.html">Research</a>
+        <a href="chess.html">Chess</a>
+        <a href="articles.html">Articles</a>
+        <a href="achievements.html" class="active">Achievements</a>
+        <a href="leadership.html">Leadership</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-    <div class="back-button-wrapper">
-        <button onclick="history.back()" class="back-arrow-btn" aria-label="Go Back">←</button>
-    </div>
+    <main class="content-container">
+        
+        <header class="award-hero-banner">
+            <img src="aalekh-award.png" alt="Aalekh Literature Award Display">
+        </header>
 
-    <h1>Aalekh Award</h1>
+        <h1 class="page-title">Honors & Achievements</h1>
+        <div class="gold-divider"></div>
 
-    <div class="mesh-container scroll-reveal">
-        <img src="aalekh-mesh.png" alt="Aalekh Award Interactive Mosaic" class="mesh-graphic">
-    </div>
+        <section class="achievement-feed">
+            <div class="achievement-item-card">
+                <div class="achievement-icon-box">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="achievement-details">
+                    <h2>Aalekh Literature Award</h2>
+                    <p>Recognized for outstanding contributions and creative excellence in literary arts and writing showcase fields.</p>
+                </div>
+            </div>
+        </section>
 
-    <div class="section-title scroll-reveal">Summary</div>
-    <p class="scroll-reveal">
-        On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, The Mysterious Call (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious Aalekh Award for literary excellence. The distinction was conferred by an extraordinary national panel, including Dr. Ramesh Pokhriyal Nishank, Dr. Kiran Bedi, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
-    </p>
-
-    <div class="section-title scroll-reveal">The Architecture of Narrative & Execution</div>
-    
-    <div class="story-heading scroll-reveal">The Genesis of a Precocious Enterprise</div>
-    <p class="scroll-reveal">
-        At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, The Mysterious Call. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on what traditional benchmarks expect before higher education.
-    </p>
-
-    <div class="story-heading scroll-reveal">Anatomy of the Narrative: Psychological Depth and Period Realism</div>
-    <p class="scroll-reveal">
-        Set against the atmospheric, grit-laden backdrop of 1980s London, The Mysterious Call is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.
-    </p>
-    <p class="scroll-reveal">
-        In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.
-    </p>
-
-    <div class="story-heading scroll-reveal">The Executive Crucible: From Concept to Global Distribution</div>
-    <p class="scroll-reveal">
-        Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership.
-    </p>
-
-    <div class="skill-container">
-        <div class="skill-card scroll-reveal">
-            <div class="skill-heading">• Rigorous Analytical Thinking</div>
-            <p style="margin:0; font-size:14px; text-align: left;">Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</p>
-        </div>
-        <div class="skill-card scroll-reveal">
-            <div class="skill-heading">• Operational Discipline</div>
-            <p style="margin:0; font-size:14px; text-align: left;">Committing to months of isolation and unrelenting work, managing school curricula alongside drafting, editing, and formatting.</p>
-        </div>
-        <div class="skill-card scroll-reveal">
-            <div class="skill-heading">• Resilience and Iteration</div>
-            <p style="margin:0; font-size:14px; text-align: left;">Systematically reconstructing chapters to achieve a professional standard.</p>
-        </div>
-        <div class="skill-card scroll-reveal">
-            <div class="skill-heading">• Strategic Execution</div>
-            <p style="margin:0; font-size:14px; text-align: left;">Managing publishing, cover design, metadata, and distribution global networks.</p>
-        </div>
-    </div>
-
-    <div class="story-heading scroll-reveal">The Litmus Test: National Recognition and Validation</div>
-    <p class="scroll-reveal">
-        The ultimate validation of this intellectual endeavor occurred when The Mysterious Call was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.
-    </p>
-    
-    <div class="jury-grid">
-        <div class="jury-member scroll-reveal">
-            • <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank">Dr. Ramesh Pokhriyal 'Nishank'</a> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank">Dr. Kiran Bedi (IPS)</a> – India’s legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <strong>Mr. Harjeet Khanduja</strong> – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <strong>Ms. Swapna Liddle</strong> – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <strong>Ms. Sutapa Basu</strong> – Renowned educationist, poet, and recipient of The Times of India’s prestigious AutHer Award.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <strong>Mr. Ankit Jhamb</strong> – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.
-        </div>
-        <div class="jury-member scroll-reveal">
-            • <strong>Ms. Harshali Singh</strong> – Acclaimed author, judge, poet, and recipient of the National Literary Award.
-        </div>
-    </div>
-
-    <p class="scroll-reveal" style="margin-top: 40px;">
-        To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.
-    </p>
-
-    <div class="story-heading scroll-reveal">The Forward Horizon</div>
-    <p class="scroll-reveal">
-        Ultimately, the journey of The Mysterious Call stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.
-    </p>
-
-    <div class="section-title scroll-reveal">Media & References</div>
-    <div class="links-wrapper scroll-reveal">
-        <a href="https://www.youtube.com/watch?v=IkhjX72XFAw&t=1h14m40s" class="media-link" target="_blank">
-            <span class="live-pulse"></span> Watch Award Moment (YouTube Live Stream at 1:14:40)
-        </a>
-        <a href="https://news.globalindianschool.org/noida/namit-shastry-of-giis-noida-wins-big-at-the-aalekh-2023-by-bennett-university" class="media-link" target="_blank">
-            📰 Global Indian School Official Article
-        </a>
-        <a href="https://www.bennett.edu.in/aalekh/" class="media-link" target="_blank">
-            🏛️ Bennett University Aalekh Interface Reference
-        </a>
-    </div>
-
-</div>
-
-<script>
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.12
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.scroll-reveal').forEach((el) => {
-        observer.observe(el);
-    });
-</script>
+    </main>
 
 </body>
 </html>
