@@ -27,7 +27,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== SYNAPSE AMBIENT BACKDROP WITH SUBTLE MOVEMENT ===== */
+        /* ===== SYNAPSE AMBIENT BACKDROP ===== */
         .bg-blobs {
             position: fixed;
             top: 0;
@@ -56,7 +56,7 @@
             100% { transform: scale(1.1) translate(-5%, 5%); }
         }
 
-        /* ===== SYSTEM ULTRA-MINIMAL NAVIGATION BAR ===== */
+        /* ===== ULTRA-MINIMAL NAVIGATION BAR ===== */
         .nav {
             background: rgba(11, 17, 22, 0.7);
             backdrop-filter: blur(12px);
@@ -84,6 +84,39 @@
             text-shadow: 0 0 10px rgba(141, 189, 193, 0.4);
         }
 
+        /* ===== SYSTEM BACK NAVIGATION ARROW ===== */
+        .back-button-wrapper {
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .back-arrow-btn {
+            background: none;
+            border: none;
+            color: #8dbdc1;
+            font-size: 22px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(141, 189, 193, 0.15);
+            background: rgba(255, 255, 255, 0.01);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .back-arrow-btn:hover {
+            color: #ffffff;
+            border-color: rgba(141, 189, 193, 0.4);
+            background: rgba(141, 189, 193, 0.08);
+            transform: translateX(-4px);
+        }
+
         /* ===== HERO CONTAINER ===== */
         .coming-soon-container {
             flex: 1;
@@ -100,7 +133,7 @@
         /* ===== DESIGNER "COMING SOON" TEXT ===== */
         .coming-soon-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(48px, 8vw, 92px); /* Scales perfectly across desktops, tablets, and mobile phones */
+            font-size: clamp(48px, 8vw, 92px);
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: 4px;
@@ -159,7 +192,7 @@
             }
         }
 
-        /* ===== RESPONSIVE FIXES ===== */
+        /* ===== RESPONSIVE MEDIA QUERIES ===== */
         @media (max-width: 768px) {
             .nav {
                 padding: 15px 10px;
@@ -172,8 +205,13 @@
                 margin: 0 8px;
                 font-size: 11px;
             }
+            .back-button-wrapper {
+                top: 80px;
+                left: 20px;
+            }
             .coming-soon-container {
                 padding: 20px;
+                margin-top: 40px;
             }
         }
     </style>
@@ -189,6 +227,10 @@
     <a href="articles.html">Articles</a>
     <a href="achievements.html">Achievements</a>
     <a href="contact.html">Contact</a>
+</div>
+
+<div class="back-button-wrapper">
+    <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
 </div>
 
 <div class="coming-soon-container">
