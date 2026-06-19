@@ -82,12 +82,37 @@
             overflow: hidden;
             background-color: #0c1424;
             margin-bottom: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .award-hero-banner img {
+        /* Smart Background Blur Layer to Fill Empty Spaces Intelligently */
+        .award-hero-banner .bg-blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-image: url('aalekh-award.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px) brightness(0.3);
+            z-index: 1;
+            transform: scale(1.1); /* Prevents edge artifacts from blur */
+        }
+
+        /* Foreground Image Optimized to Fit Without Clipping */
+        .award-hero-banner img.main-award-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            display: block;
         }
 
         /* ===== VERIFIED SOURCE EXTERNAL LINKS BADGES ===== */
@@ -276,7 +301,8 @@
     <main class="content-container">
         
         <header class="award-hero-banner">
-            <img src="aalekh-award.png" alt="Aalekh Literature Award Ceremony Layout">
+            <div class="bg-blur-layer"></div>
+            <img class="main-award-img" src="aalekh-award.png" alt="Aalekh Literature Award Ceremony Layout">
         </header>
 
         <div class="source-links-container">
