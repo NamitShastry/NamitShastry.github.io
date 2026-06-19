@@ -63,9 +63,9 @@
             text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
         }
 
-        /* ===== MAIN WORKSPACE CONTROLLER ===== */
+        /* ===== MAIN CONTAINER ===== */
         .content-container {
-            max-width: 1100px;
+            max-width: 950px;
             width: 100%;
             margin: auto;
             padding: 20px 40px 60px;
@@ -75,14 +75,13 @@
         /* HERO BANNER FOR AALEKH AWARD */
         .award-hero-banner {
             width: 100%;
-            height: 360px;
+            height: 400px;
             border-radius: 24px;
             border: 2px solid #f5c542;
             box-shadow: 0 0 35px rgba(245, 197, 66, 0.3);
             overflow: hidden;
             background-color: #0c1424;
             margin-bottom: 40px;
-            position: relative;
         }
 
         .award-hero-banner img {
@@ -93,7 +92,7 @@
 
         .page-title {
             font-family: 'Playfair Display', serif;
-            font-size: 46px;
+            font-size: 42px;
             font-weight: 700;
             background: linear-gradient(135deg, #ffffff 50%, #f5c542 100%);
             -webkit-background-clip: text;
@@ -106,52 +105,101 @@
             height: 2px;
             background: #f5c542;
             box-shadow: 0 0 8px #f5c542;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        /* ACCOMPLISHMENTS DISPLAY GLASS CARD */
-        .achievement-feed {
+        /* ===== EXECUTIVE SUMMARY BOX ===== */
+        .summary-box {
+            background: rgba(245, 197, 66, 0.04);
+            border-left: 4px solid #f5c542;
+            border-top: 1px solid rgba(245, 197, 66, 0.1);
+            border-right: 1px solid rgba(245, 197, 66, 0.1);
+            border-bottom: 1px solid rgba(245, 197, 66, 0.1);
+            padding: 25px 30px;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 40px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* ===== ESSAY ARTICLE STYLING ===== */
+        .essay-section {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 35px;
         }
 
-        .achievement-item-card {
-            background: rgba(255, 245, 220, 0.02);
-            border: 1px solid rgba(245, 197, 66, 0.15);
-            border-radius: 16px;
-            padding: 30px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .achievement-item-card:hover {
-            transform: translateY(-3px);
-            border-color: #f5c542;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .achievement-icon-box {
-            font-size: 36px;
-            color: #f5c542;
-            text-shadow: 0 0 10px rgba(245, 197, 66, 0.4);
-        }
-
-        .achievement-details h2 {
+        .essay-block h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: #ffffff;
-            margin-bottom: 6px;
+            font-size: 26px;
+            color: #f5c542;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
-        .achievement-details p {
-            font-size: 15px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
+        .essay-block p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* LIST STRUCTURING */
+        .essay-list {
+            list-style: none;
+            padding-left: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .essay-list li {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .essay-list li::before {
+            content: "•";
+            color: #f5c542;
+            font-size: 20px;
+            position: absolute;
+            left: 5px;
+            top: -2px;
+        }
+
+        .essay-list strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* WIKIPEDIA INTERACTIVE LINKS */
+        .wiki-link {
+            color: #00b4d8;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(0, 180, 216, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .wiki-link:hover {
+            color: #f5c542;
+            border-bottom-color: #f5c542;
+            text-shadow: 0 0 8px rgba(245, 197, 66, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .content-container { padding: 20px 20px 40px; }
+            .award-hero-banner { height: 260px; }
+            .page-title { font-size: 32px; }
+            .essay-block h2 { font-size: 22px; }
         }
     </style>
 </head>
@@ -173,22 +221,63 @@
     <main class="content-container">
         
         <header class="award-hero-banner">
-            <img src="aalekh-award.png" alt="Aalekh Literature Award Display">
+            <img src="aalekh-award.png" alt="Aalekh Literature Award Panel">
         </header>
 
         <h1 class="page-title">Honors & Achievements</h1>
         <div class="gold-divider"></div>
 
-        <section class="achievement-feed">
-            <div class="achievement-item-card">
-                <div class="achievement-icon-box">
-                    <i class="fa-solid fa-award"></i>
-                </div>
-                <div class="achievement-details">
-                    <h2>Aalekh Literature Award</h2>
-                    <p>Recognized for outstanding contributions and creative excellence in literary arts and writing showcase fields.</p>
-                </div>
+        <div class="summary-box">
+            <strong>Summary:</strong> On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, <em>The Mysterious Call</em> (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious <strong>Aalekh Award</strong> for literary excellence. The distinction was conferred by an extraordinary national panel, including <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal Nishank</a>, <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi</a>, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
+        </div>
+
+        <section class="essay-section">
+            
+            <div class="essay-block">
+                <h2>The Mysterious Call: Architectural Narrative, Intellectual Rigor, and National Validation</h2>
+                <h3>The Genesis of a Precocious Enterprise</h3>
+                <p>At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, <em>The Mysterious Call</em>. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.</p>
             </div>
+
+            <div class="essay-block">
+                <h2>Anatomy of the Narrative: Psychological Depth and Period Realism</h2>
+                <p>Set against the atmospheric, grit-laden backdrop of 1980s London, <em>The Mysterious Call</em> is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.</p>
+                <p>In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.</p>
+            </div>
+
+            <div class="essay-block">
+                <h2>The Executive Crucible: From Concept to Global Distribution</h2>
+                <p>Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership:</p>
+                <ul class="essay-list">
+                    <li><strong>Rigorous Analytical Thinking:</strong> Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</li>
+                    <li><strong>Operational Discipline:</strong> Committing to months of isolation and unrelenting work, managing school curricula alongside the demanding milestones of drafting, editing, and formatting.</li>
+                    <li><strong>Resilience and Iteration:</strong> Navigating the humbling process of structural editing, systematically dismantling and reconstructing entire chapters to achieve a professional, publication-ready standard.</li>
+                    <li><strong>Strategic Execution:</strong> Overseeing the logistical technicalities of independent publishing, including cover design collaboration, metadata optimization, and distribution mechanics.</li>
+                </ul>
+                <p style="margin-top: 15px;">This process solidified an enduring truth: profound impact is not a function of age, but of execution, strategy, and the intellectual stamina to endure a rigorous creative cycle.</p>
+            </div>
+
+            <div class="essay-block">
+                <h2>The Litmus Test: National Recognition and Imperial Validation</h2>
+                <p>The ultimate validation of this intellectual endeavor occurred when <em>The Mysterious Call</em> was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.</p>
+                <p>The gravity of this distinction was profoundly magnified by the caliber of the national leaders, policymakers, and public intellectuals who convened to confer the honor. My narrative voice and literary capability were evaluated and validated by an extraordinary panel of visionaries, including:</p>
+                <ul class="essay-list">
+                    <li><strong><a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal 'Nishank'</a></strong> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.</li>
+                    <li><strong><a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi (IPS)</a></strong> – India’s legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.</li>
+                    <li><strong>Mr. Harjeet Khanduja</strong> – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.</li>
+                    <li><strong>Ms. Swapna Liddle</strong> – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.</li>
+                    <li><strong>Ms. Sutapa Basu</strong> – Renowned educationist, poet, and recipient of The Times of India’s prestigious AutHer Award.</li>
+                    <li><strong>Mr. Ankit Jhamb</strong> – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.</li>
+                    <li><strong>Ms. Harshali Singh</strong> – Acclaimed author, judge, poet, and recipient of the National Literary Award.</li>
+                </ul>
+                <p style="margin-top: 15px;">To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.</p>
+            </div>
+
+            <div class="essay-block">
+                <h2>The Forward Horizon</h2>
+                <p>Ultimately, the journey of <em>The Mysterious Call</em> stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.</p>
+            </div>
+
         </section>
 
     </main>
