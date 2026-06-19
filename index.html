@@ -27,7 +27,7 @@
             justify-content: space-between;
         }
 
-        /* ===== CINEMATIC BACKGROUND SYSTEM WITH YOUR IMAGE ===== */
+        /* ===== BACKGROUND SYSTEM ===== */
         .bg-canvas {
             position: fixed;
             top: 0;
@@ -35,25 +35,12 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            /* Combines your city image with dark professional gradients and color filters */
             background: linear-gradient(180deg, rgba(4, 8, 18, 0.82) 0%, rgba(11, 21, 40, 0.88) 100%), 
                         url('city-bg.png') no-repeat center center;
             background-size: cover;
         }
 
-        /* High-tech engineering line layer */
-        .bg-canvas::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(0, 180, 216, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 180, 216, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-        }
-
-        /* ===== NAVIGATION BAR ===== */
+        /* ===== NAVIGATION ===== */
         .top-nav {
             display: flex;
             justify-content: center;
@@ -77,7 +64,7 @@
             text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
         }
 
-        /* ===== CONTAINER LAYOUT ===== */
+        /* ===== LAYOUT ===== */
         .main-wrapper {
             max-width: 1300px;
             width: 100%;
@@ -90,7 +77,6 @@
             flex: 1;
         }
 
-        /* ===== PROFILE BLOCK ===== */
         .hero-left {
             display: flex;
             flex-direction: column;
@@ -98,31 +84,25 @@
             text-align: center;
         }
 
-        /* Golden Aura Glow Frame */
+        /* FIX 1: FIXED HAIR PHOTO FRAME */
         .photo-frame {
-            width: 360px;
-            height: 460px;
+            width: 340px;
+            height: 440px;
             border-radius: 24px;
             border: 2px solid #f5c542;
-            box-shadow: 0 0 25px rgba(245, 197, 66, 0.3),
-                        0 0 50px rgba(245, 197, 66, 0.15),
+            box-shadow: 0 0 30px rgba(245, 197, 66, 0.4),
                         inset 0 0 20px rgba(245, 197, 66, 0.2);
             position: relative;
             overflow: hidden;
             margin-bottom: 30px;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-        }
-
-        .photo-frame:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 0 35px rgba(245, 197, 66, 0.5),
-                        0 0 70px rgba(245, 197, 66, 0.25);
+            background-color: #0c1424; /* Prevents white spaces on borders */
         }
 
         .photo-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* FIX: Shows entire photo, stops cutting hair short */
+            background-color: #0c1424;
         }
 
         .hero-left h1 {
@@ -133,7 +113,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 12px;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
         }
 
         .hero-left .gold-divider {
@@ -149,114 +128,108 @@
             color: rgba(255, 255, 255, 0.85);
             font-weight: 300;
             line-height: 1.6;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        /* ===== LINK MODULES GRID ===== */
+        /* ===== FIX 2: VIBRANT GLOWING COMPONENT LINKS ===== */
         .dashboard-right {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        /* Translucent Glassmorphing Cards */
         .dashboard-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(90deg, rgba(11, 21, 40, 0.75) 0%, rgba(255, 255, 255, 0.04) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 22px 30px;
+            background: rgba(255, 245, 220, 0.03);
+            border: 1px solid rgba(245, 197, 66, 0.2); /* Golden structural frames */
+            border-radius: 14px;
+            padding: 20px 30px;
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 0 15px rgba(245, 197, 66, 0.02);
         }
 
         .dashboard-card:hover {
             transform: translateX(10px);
-            border-color: rgba(245, 197, 66, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(245, 197, 66, 0.07);
+            border-color: #f5c542;
+            box-shadow: 0 0 25px rgba(245, 197, 66, 0.25),
+                        inset 0 0 20px rgba(245, 197, 66, 0.1);
         }
 
         .card-meta {
             display: flex;
             align-items: center;
-            gap: 22px;
+            gap: 20px;
             position: relative;
             z-index: 2;
         }
 
-        /* High-contrast iconography indicators */
         .card-meta i {
-            font-size: 24px;
-            color: #00b4d8;
-            text-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+            font-size: 22px;
+            color: #f5c542; /* Premium Gold Icons */
+            text-shadow: 0 0 8px rgba(245, 197, 66, 0.5);
             width: 30px;
             text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .dashboard-card:hover .card-meta i {
-            color: #f5c542;
-            text-shadow: 0 0 12px rgba(245, 197, 66, 0.6);
         }
 
         .card-meta span {
             font-size: 18px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-            letter-spacing: 0.3px;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
-        /* BACKDROP DECORATIVE WATERMARKS */
+        /* RIGHT-SIDE CONTENT BACKGROUND GRAPHICS */
         .card-backdrop-graphic {
             position: absolute;
-            right: 40px;
+            right: 30px;
             top: 50%;
             transform: translateY(-50%);
-            opacity: 0.12;
+            opacity: 0.25; /* Highly visible */
             transition: all 0.4s ease;
             pointer-events: none;
             z-index: 1;
-            color: #00b4d8;
-        }
-
-        .card-backdrop-graphic i {
-            font-size: 48px;
+            color: #f5c542; /* Matching the custom sample colors */
         }
 
         .dashboard-card:hover .card-backdrop-graphic {
-            opacity: 0.35;
-            color: #f5c542;
-            transform: translateY(-50%) scale(1.15);
+            opacity: 0.6;
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .chess-pattern-grid {
+        /* CHESSBOARD GRAPHIC LAYOUT ENGINE */
+        .chess-board-mini {
             display: grid;
-            grid-template-columns: repeat(4, 14px);
-            grid-template-rows: repeat(2, 14px);
-            gap: 2px;
+            grid-template-columns: repeat(4, 12px);
+            grid-template-rows: repeat(3, 12px);
+            gap: 1px;
+            border: 1px solid rgba(245, 197, 66, 0.4);
+            padding: 1px;
+            background-color: rgba(0,0,0,0.5);
         }
-        .chess-pattern-grid div {
-            width: 14px;
-            height: 14px;
-            background-color: currentColor;
-            opacity: 0.5;
+        .chess-board-mini div {
+            width: 12px;
+            height: 12px;
         }
-        .chess-pattern-grid div:nth-child(even) { opacity: 0.1; }
+        .chess-board-mini div:nth-child(even) {
+            background-color: #f5c542;
+        }
+
+        /* BOOK/TROPHY CARD GLOW SIZES */
+        .card-backdrop-graphic i {
+            font-size: 36px;
+            filter: drop-shadow(0 0 8px rgba(245, 197, 66, 0.4));
+        }
 
         @media (max-width: 1024px) {
             .main-wrapper { grid-template-columns: 1fr; gap: 40px; }
-            .photo-frame { width: 320px; height: 410px; }
-        }
-        @media (max-width: 600px) {
-            .top-nav { gap: 15px; padding: 15px 10px; flex-wrap: wrap; }
-            .hero-left h1 { font-size: 38px; }
-            .photo-frame { width: 260px; height: 340px; }
+            .photo-frame { width: 300px; height: 400px; }
         }
     </style>
 </head>
@@ -315,7 +288,8 @@
                     <span>Chess</span>
                 </div>
                 <div class="card-backdrop-graphic">
-                    <div class="chess-pattern-grid">
+                    <div class="chess-board-mini">
+                        <div></div><div></div><div></div><div></div>
                         <div></div><div></div><div></div><div></div>
                         <div></div><div></div><div></div><div></div>
                     </div>
