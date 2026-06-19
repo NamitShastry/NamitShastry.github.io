@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ===== SYSTEM RESET & PRESENTS ===== */
+        /* ===== SYSTEM RESET & BASICS ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -30,7 +30,7 @@
             justify-content: space-between;
         }
 
-        /* ===== CINEMATIC BACKGROUND MESH & CITY GRID EFFECTS ===== */
+        /* ===== BACKGROUND MESH EFFECTS ===== */
         .bg-canvas {
             position: fixed;
             top: 0;
@@ -44,7 +44,6 @@
             background-size: cover;
         }
 
-        /* Ambient subtle network lattice line styling overlay */
         .bg-canvas::before {
             content: '';
             position: absolute;
@@ -56,7 +55,7 @@
             -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
         }
 
-        /* ===== TOP MINIMAL NAV BAR ===== */
+        /* ===== NAV BAR ===== */
         .top-nav {
             display: flex;
             justify-content: center;
@@ -81,7 +80,7 @@
             text-shadow: 0 0 12px rgba(245, 197, 66, 0.4);
         }
 
-        /* ===== MAIN WORKSPACE CONTAINER LAYOUT ===== */
+        /* ===== LAYOUT CONTAINER ===== */
         .main-wrapper {
             max-width: 1300px;
             width: 100%;
@@ -94,7 +93,7 @@
             flex: 1;
         }
 
-        /* ===== LEFT COLUMN: PROFILE CARD & TITLES ===== */
+        /* ===== LEFT COLUMN: PROFILE CARD ===== */
         .hero-left {
             display: flex;
             flex-direction: column;
@@ -102,7 +101,7 @@
             text-align: center;
         }
 
-        /* Premium Gold Glowing Frame Configuration Layout */
+        /* Premium Gold Glowing Frame */
         .photo-frame {
             width: 360px;
             height: 460px;
@@ -125,7 +124,7 @@
                         0 0 40px rgba(245, 197, 66, 0.15);
         }
 
-        /* Image sizing handler code */
+        /* Automatic centering and resizing framework for profile picture file */
         .photo-frame img {
             width: 100%;
             height: 100%;
@@ -133,27 +132,6 @@
             position: absolute;
             top: 0;
             left: 0;
-        }
-
-        /* Transparent layout check styling indicator helper */
-        .photo-placeholder-text {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            letter-spacing: 1px;
-            font-weight: 300;
-            padding: 20px;
-        }
-
-        .photo-placeholder-text i {
-            font-size: 36px;
-            margin-bottom: 12px;
-            color: rgba(245, 197, 66, 0.2);
         }
 
         .hero-left h1 {
@@ -184,14 +162,13 @@
             letter-spacing: 0.3px;
         }
 
-        /* ===== RIGHT COLUMN: STYLIZED DASHBOARD LINKS LIST ===== */
+        /* ===== RIGHT COLUMN: LINK MODULES ===== */
         .dashboard-right {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        /* Base Card Styling Layout Engine */
         .dashboard-card {
             display: flex;
             align-items: center;
@@ -208,7 +185,6 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Shared structural card layout hovering actions */
         .dashboard-card:hover {
             transform: translateX(8px);
             background: linear-gradient(90deg, rgba(245, 197, 66, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
@@ -216,7 +192,6 @@
             box-shadow: inset 0 0 15px rgba(245, 197, 66, 0.03);
         }
 
-        /* Structural card left-side align text metadata info wrapper */
         .card-meta {
             display: flex;
             align-items: center;
@@ -249,7 +224,7 @@
             color: #ffffff;
         }
 
-        /* ===== CUSTOM GRAPHIC THEME BACKDROP WATERMARKS ===== */
+        /* ===== GRAPHIC WATERMARKS ===== */
         .card-backdrop-graphic {
             position: absolute;
             right: 40px;
@@ -275,7 +250,7 @@
             transform: translateY(-50%) scale(1.08);
         }
 
-        /* CHESS WATERMARK: Custom Chessboard Lattice Pattern Graphic Overlay */
+        /* Chessboard overlay system block pattern */
         .chess-pattern-grid {
             display: grid;
             grid-template-columns: repeat(4, 15px);
@@ -289,7 +264,7 @@
         }
         .chess-pattern-grid div:nth-child(odd) { background-color: #ffffff; }
 
-        /* ===== RESPONSIVE FLOW ADAPTABILITY MEDIA QUERIES ===== */
+        /* ===== RESPONSIVE MEDIA QUERIES ===== */
         @media (max-width: 1024px) {
             .main-wrapper {
                 grid-template-columns: 1fr;
@@ -340,11 +315,7 @@
         
         <section class="hero-left">
             <div class="photo-frame">
-                <div class="photo-placeholder-text">
-                    <i class="fa-regular fa-image"></i>
-                    <p style="font-size:13px; color:rgba(255,255,255,0.4);">[ Portrait Image Placeholder ]</p>
-                    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin-top:8px; line-height:1.4;">Image tag left transparent. Read instructions below to drop image path directly into code.</p>
-                </div>
+                <img src="profile.jpg" alt="Namit Shastry">
             </div>
             
             <h1>Namit Shastry</h1>
