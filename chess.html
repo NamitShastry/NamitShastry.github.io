@@ -1,406 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Milestones | Namit Shastry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght=0,600;0,700;1,500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Chess | Namit Shastry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <style>
-        /* ===== CORE BRAND PRESETS ===== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            background-color: #0e171e;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.8;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-        }
+<style>
+:root{
+  --bg-0:#070a0c;
+  --bg-1:#0d1417;
+  --bg-2:#121b1f;
+  --ivory:#f3ede1;
+  --ivory-dim:#a9b3ae;
+  --gold:#c9a04f;
+  --gold-bright:#e9c581;
+  --teal:#4ecdc4;
+  --teal-dim:#3a8f8a;
+  --line:rgba(243,237,225,0.08);
+  --square-dark: rgba(78,205,196,0.035);
+}
 
-        /* ===== AMBIENT BACKDROP ===== */
-        .bg-blobs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0b1116 0%, #121e24 100%);
-        }
+*{box-sizing:border-box;margin:0;padding:0;}
 
-        .bg-blobs::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 75vw;
-            height: 75vw;
-            background: radial-gradient(circle, rgba(78, 142, 147, 0.35) 0%, rgba(39, 76, 85, 0) 70%);
-            border-radius: 50%;
-            filter: blur(80px);
-        }
+html{scroll-behavior:smooth;}
 
-        /* ===== STRUCTURAL CONTAINER ===== */
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 60px 40px 100px;
-            position: relative;
-            z-index: 1;
-        }
+body{
+  background:var(--bg-0);
+  color:var(--ivory);
+  font-family:'Inter',sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:default;
+}
 
-        /* ===== SYSTEM BACK NAVIGATION ARROW (LINKS TO HOMEPAGE) ===== */
-        .back-button-wrapper {
-            position: absolute;
-            top: 60px;
-            left: 40px;
-            z-index: 10;
-        }
+::selection{background:var(--gold); color:#0a0e0f;}
 
-        .back-arrow-btn {
-            background: none;
-            border: none;
-            color: #8dbdc1;
-            font-size: 22px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(141, 189, 193, 0.15);
-            background: rgba(255, 255, 255, 0.01);
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+/* ============ SCROLL PROGRESS ============ */
+.progress-rail{
+  position:fixed; top:0; left:0; height:2px; width:100%;
+  z-index:200; background:transparent;
+}
+.progress-fill{
+  height:100%; width:0%;
+  background:linear-gradient(90deg,var(--teal),var(--gold));
+  box-shadow:0 0 12px var(--teal);
+  transition:width .05s linear;
+}
 
-        .back-arrow-btn:hover {
-            color: #ffffff;
-            border-color: rgba(141, 189, 193, 0.4);
-            background: rgba(141, 189, 193, 0.08);
-            transform: translateX(-4px);
-        }
+/* ============ AMBIENT CHESS-BOARD FIELD ============ */
+.board-field{
+  position:fixed; inset:0; z-index:-2;
+  background:
+    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-0) 60%);
+}
+.board-field svg{
+  position:absolute; inset:0; width:100%; height:100%;
+  opacity:.5;
+}
+.board-field .glow-a{
+  position:absolute; top:-15%; right:-10%; width:60vw; height:60vw;
+  background:radial-gradient(circle, rgba(78,205,196,0.14) 0%, transparent 70%);
+  filter:blur(60px); animation:driftA 22s ease-in-out infinite;
+}
+.board-field .glow-b{
+  position:absolute; bottom:-20%; left:-15%; width:55vw; height:55vw;
+  background:radial-gradient(circle, rgba(201,160,79,0.12) 0%, transparent 70%);
+  filter:blur(70px); animation:driftB 26s ease-in-out infinite;
+}
+@keyframes driftA{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-4%,6%) scale(1.08);}
+}
+@keyframes driftB{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(5%,-5%) scale(1.05);}
+}
 
-        /* ===== MASTER PAGE HEADER ===== */
-        header {
-            margin-top: 50px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
+/* ============ CURSOR-FOLLOW KNIGHT SPARK ============ */
+.cursor-glow{
+  position:fixed; width:280px; height:280px; border-radius:50%;
+  background:radial-gradient(circle, rgba(78,205,196,0.06), transparent 70%);
+  pointer-events:none; z-index:1; transform:translate(-50%,-50%);
+  transition:opacity .3s ease;
+  will-change:transform;
+}
 
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 44px;
-            font-weight: 700;
-            line-height: 1.2;
-            background: linear-gradient(135deg, #ffffff 40%, #c4dedf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
+/* ============ LAYOUT ============ */
+.container{max-width:900px; margin:auto; padding:0 40px 140px; position:relative; z-index:2;}
 
-        header .subtitle {
-            font-size: 13px;
-            font-weight: 600;
-            color: #8dbdc1;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+.back-button-wrapper{position:fixed; top:36px; left:40px; z-index:100;}
+.back-arrow-btn{
+  background:rgba(7,10,12,0.6); border:1px solid var(--line);
+  color:var(--teal); font-size:20px; width:46px; height:46px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  text-decoration:none; backdrop-filter:blur(12px);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.back-arrow-btn:hover{
+  color:var(--bg-0); background:var(--teal); border-color:var(--teal);
+  box-shadow:0 0 24px rgba(78,205,196,0.5); transform:translateX(-4px);
+}
 
-        /* ===== INTRO BIOGRAPHY BALANCING ===== */
-        .intro-p {
-            color: #dae5e6;
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.85;
-            margin-bottom: 40px;
-            text-align: justify;
-        }
+/* ============ HERO ============ */
+.hero{
+  min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+  padding-top:60px; position:relative;
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--teal); margin-bottom:22px;
+  display:flex; align-items:center; gap:12px;
+  opacity:0; transform:translateY(14px);
+}
+.hero-eyebrow::before{
+  content:''; width:8px; height:8px; background:var(--teal); border-radius:1px;
+  box-shadow:0 0 10px var(--teal); animation:pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1;} 50%{opacity:.3;}}
 
-        /* ===== SECTION HEADERS ===== */
-        .section-title {
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: #8dbdc1;
-            margin-top: 50px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.hero h1{
+  font-family:'Fraunces', serif; font-weight:700;
+  font-size:clamp(48px,9vw,92px); line-height:.98;
+  letter-spacing:-.02em;
+}
+.hero h1 .line{
+  display:block; overflow:hidden;
+}
+.hero h1 .line span{
+  display:inline-block; transform:translateY(110%);
+  background:linear-gradient(135deg,#ffffff 20%, var(--gold-bright) 65%, var(--teal) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(141, 189, 193, 0.2), transparent);
-        }
+.hero-sub{
+  margin-top:34px; max-width:560px; font-size:17px; font-weight:300;
+  color:var(--ivory-dim); opacity:0; transform:translateY(16px);
+}
 
-        /* ===== LAYOUT SYSTEMS (TITLES & SCORES) ===== */
-        .split-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 30px;
-        }
+.hero-rating{
+  margin-top:56px; display:flex; gap:56px; flex-wrap:wrap;
+  opacity:0; transform:translateY(16px);
+}
+.hero-rating .stat{position:relative;}
+.hero-rating .num{
+  font-family:'Fraunces', serif; font-weight:600; font-size:38px;
+  color:var(--ivory); display:flex; align-items:baseline; gap:4px;
+}
+.hero-rating .num small{font-size:15px; color:var(--gold); font-family:'JetBrains Mono',monospace; font-weight:500;}
+.hero-rating .cap{
+  font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--ivory-dim); margin-top:6px;
+}
 
-        .metric-box {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(141, 189, 193, 0.06);
-            border-radius: 14px;
-            padding: 24px 28px;
-            backdrop-filter: blur(10px);
-        }
+/* Knight tour signature graphic */
+.knight-tour{
+  position:absolute; right:-40px; top:8%; width:340px; height:340px;
+  opacity:.9; pointer-events:none;
+}
+@media (max-width:900px){ .knight-tour{display:none;} }
+.knight-tour svg{width:100%; height:100%;}
+.kt-square{fill:rgba(78,205,196,0.045); stroke:var(--line); stroke-width:1;}
+.kt-path{
+  fill:none; stroke:var(--gold); stroke-width:1.6; stroke-linecap:round;
+  stroke-dasharray:6 8; opacity:.55;
+  animation:march 5s linear infinite;
+}
+@keyframes march{to{stroke-dashoffset:-140;}}
+.kt-knight{
+  filter:drop-shadow(0 0 8px var(--teal));
+  animation:knightMove 8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes knightMove{
+  0%,10%{ transform:translate(0px,0px); }
+  22%,32%{ transform:translate(85px,-42.5px); }
+  44%,54%{ transform:translate(42.5px,-127.5px); }
+  66%,76%{ transform:translate(-42.5px,-85px); }
+  88%,98%{ transform:translate(0px,0px); }
+  100%{ transform:translate(0px,0px); }
+}
 
-        .metric-box h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
+/* ============ SECTION TITLES ============ */
+.section-title{
+  font-family:'JetBrains Mono', monospace; text-transform:uppercase;
+  font-size:11.5px; font-weight:600; letter-spacing:3px; color:var(--teal);
+  margin-top:110px; margin-bottom:32px; display:flex; align-items:center; gap:16px;
+  opacity:0; transform:translateY(18px);
+}
+.section-title .coord{
+  color:var(--gold); font-weight:600;
+}
+.section-title::after{
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, rgba(78,205,196,0.35), transparent);
+}
 
-        .metric-box p {
-            font-size: 14.5px;
-            color: #a3b8ba;
-            font-weight: 300;
-            margin-bottom: 16px;
-        }
+.intro-p{
+  color:var(--ivory-dim); font-size:16.5px; font-weight:300;
+  max-width:680px; opacity:0; transform:translateY(18px);
+}
 
-        .title-badge-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+/* ============ METRIC GRID ============ */
+.split-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:10px;}
+@media (max-width:720px){.split-grid{grid-template-columns:1fr;}}
 
-        .title-badge {
-            background: rgba(141, 189, 193, 0.04);
-            border: 1px solid rgba(141, 189, 193, 0.12);
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.metric-box{
+  background:linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  border:1px solid var(--line); border-radius:16px; padding:30px 32px;
+  position:relative; overflow:hidden;
+  opacity:0; transform:translateY(24px);
+  transition:transform .5s cubic-bezier(.16,1,.3,1), border-color .5s ease, box-shadow .5s ease;
+}
+.metric-box::before{
+  content:''; position:absolute; inset:0; border-radius:16px; padding:1px;
+  background:linear-gradient(135deg, rgba(78,205,196,0.4), transparent 40%, rgba(201,160,79,0.3));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite:exclude;
+  opacity:0; transition:opacity .5s ease;
+}
+.metric-box:hover{ transform:translateY(-6px); box-shadow:0 20px 50px -20px rgba(0,0,0,0.6); }
+.metric-box:hover::before{opacity:1;}
 
-        .title-badge span {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #4ecdc4;
-            background: rgba(78, 205, 196, 0.1);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
+.metric-box h3{
+  font-family:'Fraunces', serif; font-weight:600; font-size:21px; margin-bottom:12px;
+}
+.metric-box p{font-size:14px; color:var(--ivory-dim); font-weight:300; margin-bottom:18px;}
 
-        /* FIDE ID Dynamic Hyperlink */
-        .fide-link {
-            color: #4ecdc4;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px dashed rgba(78, 205, 196, 0.4);
-            transition: all 0.2s ease;
-        }
+.title-badge-container{display:flex; flex-direction:column; gap:10px;}
+.title-badge{
+  background:rgba(255,255,255,0.02); border:1px solid var(--line);
+  padding:12px 18px; border-radius:10px; font-size:14px; font-weight:500;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:border-color .3s ease, background .3s ease;
+}
+.title-badge:hover{border-color:rgba(78,205,196,0.4); background:rgba(78,205,196,0.04);}
+.title-badge span{
+  font-size:10.5px; text-transform:uppercase; letter-spacing:1px; color:var(--teal);
+  background:rgba(78,205,196,0.1); padding:3px 9px; border-radius:5px; font-family:'JetBrains Mono',monospace;
+}
 
-        .fide-link:hover {
-            color: #ffffff;
-            border-bottom-color: #ffffff;
-            background: rgba(78, 205, 196, 0.05);
-        }
+.fide-link{
+  color:var(--gold-bright); text-decoration:none; font-weight:600; font-family:'JetBrains Mono',monospace;
+  border-bottom:1px dashed rgba(201,160,79,0.45); transition:all .25s ease; position:relative;
+}
+.fide-link:hover{color:#fff; border-bottom-color:#fff; text-shadow:0 0 10px rgba(201,160,79,0.6);}
 
-        .stat-row {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 8px 0;
-            display: flex;
-            justify-content: space-between;
-            font-size: 14.5px;
-        }
+.stat-row{
+  border-bottom:1px solid rgba(255,255,255,0.04); padding:10px 0;
+  display:flex; justify-content:space-between; font-size:14.5px;
+}
+.stat-row:last-child{border-bottom:none;}
+.stat-row .label{color:var(--ivory-dim); font-weight:300;}
+.stat-row .value{color:var(--gold-bright); font-weight:500; font-family:'JetBrains Mono',monospace; font-size:13.5px;}
 
-        .stat-row .label {
-            color: #a3b8ba;
-            font-weight: 300;
-        }
+/* Tournament highlight box */
+.metric-box.feature{margin-top:8px; margin-bottom:56px;}
+.metric-box.feature h3{font-size:19px; line-height:1.4;}
 
-        .stat-row .value {
-            color: #f7cb65;
-            font-weight: 500;
-        }
+/* ============ CHAMPIONSHIP TIMELINE ============ */
+.championship-list{display:flex; flex-direction:column; gap:2px; position:relative;}
+.championship-list::before{
+  content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px;
+  background:linear-gradient(180deg, var(--teal), rgba(201,160,79,0.5), transparent);
+  opacity:.5;
+}
+.championship-card{
+  padding:18px 0 18px 30px; position:relative;
+  opacity:0; transform:translateX(-16px);
+  transition:padding .3s ease;
+}
+.championship-card::before{
+  content:''; position:absolute; left:-4px; top:24px; width:9px; height:9px;
+  border-radius:50%; background:var(--bg-0); border:2px solid var(--teal);
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.championship-card:hover{padding-left:38px;}
+.championship-card:hover::before{
+  background:var(--gold); border-color:var(--gold);
+  box-shadow:0 0 14px var(--gold);
+}
 
-        /* ===== TIMELINE/RECORD CARDS ===== */
-        .championship-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+.placement-title{font-size:16px; font-weight:600; color:var(--ivory);}
+.placement-title span{color:var(--gold-bright); font-weight:400;}
+.placement-venue{font-size:13.5px; color:var(--ivory-dim); font-weight:300; margin-top:3px;}
 
-        .championship-card {
-            background: rgba(255, 255, 255, 0.01);
-            border-left: 2px solid rgba(141, 189, 193, 0.2);
-            padding: 10px 0 10px 24px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+/* ============ CLOSING ============ */
+.closing{
+  margin-top:120px; padding:48px 0 0; border-top:1px solid var(--line);
+  opacity:0; transform:translateY(20px);
+}
+.closing p{max-width:680px; font-size:16.5px; font-weight:300; color:var(--ivory-dim);}
+.closing p strong{color:var(--ivory); font-weight:500;}
 
-        .championship-card:hover {
-            border-left-color: #4ecdc4;
-            background: rgba(141, 189, 193, 0.02);
-            padding-left: 28px;
-        }
+/* reveal helper class toggled by JS */
+.reveal{transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1 !important; transform:none !important;}
 
-        .placement-title {
-            font-size: 15.5px;
-            font-weight: 600;
-            color: #ffffff;
-        }
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+}
 
-        .placement-title span {
-            color: #f7cb65;
-            font-weight: 400;
-        }
-
-        .placement-venue {
-            font-size: 13.5px;
-            color: #a3b8ba;
-            font-weight: 300;
-            margin-top: 2px;
-        }
-
-        /* ===== RESPONSIVE MEDIA QUERIES ===== */
-        @media (max-width: 768px) {
-            header h1 { font-size: 32px; }
-            .back-button-wrapper { top: 20px; left: 20px; }
-            .container { padding: 20px 20px 60px; }
-            header { margin-top: 60px; }
-            .split-grid { grid-template-columns: 1fr; gap: 20px; }
-        }
-    </style>
+@media (max-width:768px){
+  .container{padding:0 22px 100px;}
+  .back-button-wrapper{top:20px; left:20px;}
+  .hero{padding-top:100px;}
+}
+</style>
 </head>
 <body>
 
-<div class="bg-blobs"></div>
+<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="board-field">
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <defs>
+      <pattern id="checker" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+        <rect width="32" height="32" fill="rgba(78,205,196,0.025)"/>
+        <rect x="32" y="32" width="32" height="32" fill="rgba(78,205,196,0.025)"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#checker)"/>
+  </svg>
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="back-button-wrapper">
+  <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+</div>
 
 <div class="container">
 
-    <div class="back-button-wrapper">
-        <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+  <section class="hero">
+    <div class="hero-eyebrow reveal">Competitive Analytics &amp; Arena Titles</div>
+    <h1>
+      <span class="line"><span>Competitive</span></span>
+      <span class="line"><span>Chess</span></span>
+    </h1>
+    <p class="hero-sub reveal">Chess has served as one of the most formative intellectual pursuits of my life — cultivating disciplined analytical thinking, decision-making under uncertainty, and the ability to perform under sustained competitive pressure against some of India's strongest scholastic and professional players.</p>
+
+    <div class="hero-rating reveal">
+      <div class="stat">
+        <div class="num" data-count="5">0<small>/rated</small></div>
+        <div class="cap">FIDE Tournaments</div>
+      </div>
+      <div class="stat">
+        <div class="num" data-count="10">0<small>/titles</small></div>
+        <div class="cap">Championship Records</div>
+      </div>
+      <div class="stat">
+        <div class="num">3<small>/tier</small></div>
+        <div class="cap">Arena Titles Held</div>
+      </div>
     </div>
 
-    <header>
-        <div class="subtitle">Competitive Analytics & Arena Titles</div>
-        <h1>Competitive Chess</h1>
-    </header>
+    <div class="knight-tour">
+      <svg viewBox="0 0 300 300">
+        <g>
+          <rect class="kt-square" x="0" y="127.5" width="42.5" height="42.5" rx="4"/>
+          <rect class="kt-square" x="85" y="85" width="42.5" height="42.5" rx="4"/>
+          <rect class="kt-square" x="127.5" y="0" width="42.5" height="42.5" rx="4"/>
+          <rect class="kt-square" x="42.5" y="42.5" width="42.5" height="42.5" rx="4"/>
+        </g>
+        <path class="kt-path" d="M 21 148 L 106 106 L 148 21"/>
+        <path class="kt-path" d="M 106 106 L 63 63"/>
+        <g class="kt-knight">
+          <text x="0" y="170" font-size="38" fill="var(--gold-bright)">♞</text>
+        </g>
+      </svg>
+    </div>
+  </section>
 
-    <p class="intro-p">Chess has served as one of the most formative intellectual pursuits of my life, cultivating disciplined analytical thinking, decision-making under uncertainty, and the ability to perform under sustained competitive pressure. Through years of rigorous training and tournament play, I have competed against some of the strongest scholastic and professional players in India while earning multiple international distinctions and championship titles.</p>
-
-    <div class="section-title">International Standings</div>
-    <div class="split-grid">
-        <div class="metric-box">
-            <h3>FIDE Official Registry</h3>
-            <p>Registered profile under the Fédération Internationale des Échecs global governing structure.</p>
-            <div class="stat-row" style="border-top: 1px solid rgba(255, 255, 255, 0.03); margin-top: 10px;">
-                <span class="label">Official FIDE ID</span>
-                <span class="value">
-                    <a href="https://ratings.fide.com/profile/88120040" target="_blank" rel="noopener noreferrer" class="fide-link">88120040</a>
-                </span>
-            </div>
-            <div class="stat-row">
-                <span class="label">Governing System</span>
-                <span class="value" style="color:#ffffff;">FIDE World Ecosystem</span>
-            </div>
-        </div>
-
-        <div class="metric-box">
-            <h3>Accredited Arena Titles</h3>
-            <div class="title-badge-container">
-                <div class="title-badge">Arena International Master <span>AIM</span></div>
-                <div class="title-badge">Arena FIDE Master <span>AFM</span></div>
-                <div class="title-badge">Arena Candidate Master <span>ACM</span></div>
-            </div>
-        </div>
+  <div class="section-title reveal"><span class="coord">01</span> International Standings</div>
+  <div class="split-grid">
+    <div class="metric-box reveal">
+      <h3>FIDE Official Registry</h3>
+      <p>Registered profile under the Fédération Internationale des Échecs global governing structure.</p>
+      <div class="stat-row" style="border-top:1px solid rgba(255,255,255,0.04); margin-top:6px;">
+        <span class="label">Official FIDE ID</span>
+        <span class="value"><a href="https://ratings.fide.com/profile/88120040" target="_blank" rel="noopener noreferrer" class="fide-link">88120040</a></span>
+      </div>
+      <div class="stat-row">
+        <span class="label">Governing System</span>
+        <span class="value">FIDE World Ecosystem</span>
+      </div>
     </div>
 
-    <div class="section-title">Internationally Rated FIDE Campaigns</div>
-    <p class="intro-p" style="font-size:14.5px; margin-bottom:20px;">Over the course of my competitive journey, I have participated in <strong>five International FIDE-Rated Tournaments</strong>, regularly competing head-to-head against titled professionals including Grandmasters (GM), International Masters (IM), FIDE Masters (FM), and Candidate Masters (CM).</p>
-    
-    <div class="metric-box" style="margin-bottom:40px;">
-        <h3 style="font-size:18px; margin-bottom:6px;">2nd Noida Open International FIDE-Rated Chess Tournament</h3>
-        <p style="margin-bottom:15px;">Key metrics accomplished within elite international and national competitive frameworks:</p>
-        <div class="stat-row" style="border-top: 1px solid rgba(255, 255, 255, 0.03);"><span class="label">Division Category Standings</span><span class="value">Secured 2nd Place</span></div>
-        <div class="stat-row"><span class="label">Overall Global Tournament Field Ranking</span><span class="value">Finished 52nd Overall</span></div>
+    <div class="metric-box reveal">
+      <h3>Accredited Arena Titles</h3>
+      <div class="title-badge-container">
+        <div class="title-badge">Arena International Master <span>AIM</span></div>
+        <div class="title-badge">Arena FIDE Master <span>AFM</span></div>
+        <div class="title-badge">Arena Candidate Master <span>ACM</span></div>
+      </div>
     </div>
+  </div>
 
-    <div class="section-title">Championship Records & Titles</div>
-    <div class="championship-list">
-        <div class="championship-card">
-            <div class="placement-title">Kaabil Kids Chess Academy Rapid Tournament <span>— 1st Place (1500–1599) & 8th Overall</span></div>
-            <div class="placement-venue">Championship division placement metric (2025)</div>
-        </div>
+  <div class="section-title reveal"><span class="coord">02</span> Internationally Rated FIDE Campaigns</div>
+  <p class="intro-p reveal">Over the course of my competitive journey, I have participated in <strong style="color:var(--ivory); font-weight:500;">five International FIDE-Rated Tournaments</strong>, regularly competing head-to-head against titled professionals including Grandmasters (GM), International Masters (IM), FIDE Masters (FM), and Candidate Masters (CM).</p>
 
-        <div class="championship-card">
-            <div class="placement-title">Harshit Gupta Memorial All India Online Chess Tournament <span>— Champion</span></div>
-            <div class="placement-venue">National Circuit Open Bracket Milestone Title (2025)</div>
-        </div>
+  <div class="metric-box feature reveal" style="margin-top:26px;">
+    <h3>2nd Noida Open International FIDE-Rated Chess Tournament</h3>
+    <p>Key metrics accomplished within elite international and national competitive frameworks:</p>
+    <div class="stat-row" style="border-top:1px solid rgba(255,255,255,0.04);"><span class="label">Division Category Standings</span><span class="value">2nd Place</span></div>
+    <div class="stat-row"><span class="label">Overall Global Tournament Field Ranking</span><span class="value">52nd Overall</span></div>
+  </div>
 
-        <div class="championship-card">
-            <div class="placement-title">7th Speed Chess Championship <span>— Runner-Up</span></div>
-            <div class="placement-venue">Secured Second Place Standing within U-19 Boys Division (2025)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">The Chess Conquerors Cup <span>— Runner-Up (U-16) & 13th Place Open</span></div>
-            <div class="placement-venue">Double division placement rankings achieved back-to-back (2025)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">PratiSpardha District Sports Meet <span>— Champion</span></div>
-            <div class="placement-venue">First Position standing at the 1st Rotary District Sports Meet Framework (2024)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">CBSE North Zone 1 Chess Championship <span>— Individual Gold Medalist</span></div>
-            <div class="placement-venue">Earned 1st Individual Title (2023) • Secured 3rd Place Individual Finish (2024)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">CBSE North Zone 1 Team League <span>— Bronze Medalist Team</span></div>
-            <div class="placement-venue">Institutional Podium Finish representing School Squad (2023)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">The Champions League Qualifying Round <span>— Champion</span></div>
-            <div class="placement-venue">First Position victory; hosted natively by Prometheus School (2023)</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">Cleo County Chess Championship <span>— Title Champion</span></div>
-            <div class="placement-venue">First Position standing within the community tournament division layout</div>
-        </div>
-
-        <div class="championship-card">
-            <div class="placement-title">GIIS Noida Intramural Chess Championship <span>— First Place</span></div>
-            <div class="placement-venue">Gold Medal Rank inside the internal campus tournament brackets</div>
-        </div>
+  <div class="section-title reveal"><span class="coord">03</span> Championship Records &amp; Titles</div>
+  <div class="championship-list">
+    <div class="championship-card reveal">
+      <div class="placement-title">Kaabil Kids Chess Academy Rapid Tournament <span>— 1st Place (1500–1599) &amp; 8th Overall</span></div>
+      <div class="placement-venue">Championship division placement metric (2025)</div>
     </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">Harshit Gupta Memorial All India Online Chess Tournament <span>— Champion</span></div>
+      <div class="placement-venue">National Circuit Open Bracket Milestone Title (2025)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">7th Speed Chess Championship <span>— Runner-Up</span></div>
+      <div class="placement-venue">Secured Second Place Standing within U-19 Boys Division (2025)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">The Chess Conquerors Cup <span>— Runner-Up (U-16) &amp; 13th Place Open</span></div>
+      <div class="placement-venue">Double division placement rankings achieved back-to-back (2025)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">PratiSpardha District Sports Meet <span>— Champion</span></div>
+      <div class="placement-venue">First Position standing at the 1st Rotary District Sports Meet Framework (2024)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">CBSE North Zone 1 Chess Championship <span>— Individual Gold Medalist</span></div>
+      <div class="placement-venue">Earned 1st Individual Title (2023) • Secured 3rd Place Individual Finish (2024)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">CBSE North Zone 1 Team League <span>— Bronze Medalist Team</span></div>
+      <div class="placement-venue">Institutional Podium Finish representing School Squad (2023)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">The Champions League Qualifying Round <span>— Champion</span></div>
+      <div class="placement-venue">First Position victory; hosted natively by Prometheus School (2023)</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">Cleo County Chess Championship <span>— Title Champion</span></div>
+      <div class="placement-venue">First Position standing within the community tournament division layout</div>
+    </div>
+    <div class="championship-card reveal">
+      <div class="placement-title">GIIS Noida Intramural Chess Championship <span>— First Place</span></div>
+      <div class="placement-venue">Gold Medal Rank inside the internal campus tournament brackets</div>
+    </div>
+  </div>
 
-    <div class="section-title">Beyond the Board</div>
-    <p class="intro-p" style="margin-bottom: 0;">While trophies and titles mark milestones, the deeper value of chess lies in the habits it has instilled: strategic foresight, pattern recognition, risk assessment, emotional discipline, and the ability to make high-stakes decisions with incomplete information. These lessons continue to shape my approach to academics, entrepreneurship, research, and leadership. It remains a lifelong laboratory for developing the mindset required to solve complex problems, lead effectively, and compete at the highest levels of excellence.</p>
+  <div class="closing reveal">
+    <div class="section-title" style="margin-top:0;"><span class="coord">04</span> Beyond the Board</div>
+    <p>While trophies and titles mark milestones, the deeper value of chess lies in the habits it has instilled: <strong>strategic foresight, pattern recognition, risk assessment, emotional discipline</strong>, and the ability to make high-stakes decisions with incomplete information. These lessons continue to shape my approach to academics, entrepreneurship, research, and leadership — a lifelong laboratory for developing the mindset required to solve complex problems, lead effectively, and compete at the highest levels of excellence.</p>
+  </div>
 
 </div>
+
+<script>
+// Scroll progress bar
+const fill = document.getElementById('progressFill');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  fill.style.width = scrolled + '%';
+}
+document.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+
+// Cursor glow follow (desktop only)
+const glow = document.getElementById('cursorGlow');
+let gx=window.innerWidth/2, gy=window.innerHeight/2, tx=gx, ty=gy;
+window.addEventListener('mousemove', e=>{ tx=e.clientX; ty=e.clientY; });
+function loop(){
+  gx += (tx-gx)*0.08; gy += (ty-gy)*0.08;
+  glow.style.transform = `translate(${gx}px, ${gy}px)`;
+  requestAnimationFrame(loop);
+}
+if(window.matchMedia('(hover: hover)').matches){ loop(); } else { glow.style.display='none'; }
+
+// Hero entrance sequence
+window.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelectorAll('.hero h1 .line span').forEach((el,i)=>{
+    el.style.transition = 'transform 1s cubic-bezier(.16,1,.3,1)';
+    el.style.transitionDelay = (0.15 + i*0.12) + 's';
+    requestAnimationFrame(()=> el.style.transform = 'translateY(0)');
+  });
+  const heroBits = document.querySelectorAll('.hero-eyebrow, .hero-sub, .hero-rating');
+  heroBits.forEach((el,i)=>{
+    el.style.transitionDelay = (0.5 + i*0.14) + 's';
+    requestAnimationFrame(()=>{ el.style.opacity=1; el.style.transform='none'; });
+  });
+});
+
+// Scroll reveal via IntersectionObserver
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((entry, idx)=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const siblingsDelay = Array.from(el.parentElement.children).indexOf(el) * 0.06;
+      el.style.transitionDelay = Math.min(siblingsDelay, 0.4) + 's';
+      el.classList.add('in');
+      io.unobserve(el);
+    }
+  });
+}, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+revealEls.forEach(el=> io.observe(el));
+
+// Animated counters
+const counters = document.querySelectorAll('[data-count]');
+const cio = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-count'),10);
+      const small = el.querySelector('small');
+      let cur = 0;
+      const dur = 900;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now-start)/dur, 1);
+        cur = Math.floor(p*target);
+        el.childNodes[0].nodeValue = cur;
+        if(p<1) requestAnimationFrame(tick);
+        else el.childNodes[0].nodeValue = target;
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    }
+  });
+}, {threshold:0.5});
+counters.forEach(c=> cio.observe(c));
+</script>
 
 </body>
 </html>
