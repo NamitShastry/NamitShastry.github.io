@@ -1,379 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements | Namit Shastry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achievements | Namit Shastry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background-color:#040812;color:#fff;font-family:'Inter',sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
+}
+body.intro-active{overflow:hidden;height:100vh;}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* ===== BACKGROUND ===== */
+.bg-canvas{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;
+  background:linear-gradient(180deg,rgba(4,8,18,0.85) 0%,rgba(11,21,40,0.9) 100%), url('city-bg.png') no-repeat center center;
+  background-size:cover;
+}
+.bg-canvas::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 15%, rgba(245,197,66,0.08), transparent 45%),
+             radial-gradient(circle at 85% 80%, rgba(0,180,216,0.06), transparent 50%);
+}
+.grain{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.progress-rail{position:fixed;top:0;left:0;height:3px;width:100%;z-index:120;background:transparent;}
+.progress-rail::before{
+  content:'';display:block;height:100%;width:var(--scrollP,0%);
+  background:linear-gradient(90deg,#f5c542,#00b4d8);
+  box-shadow:0 0 12px rgba(245,197,66,0.6);
+  transition:width .08s linear;
+}
+.cursor-glow{
+  position:fixed;top:0;left:0;width:380px;height:380px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle, rgba(245,197,66,0.09) 0%, rgba(245,197,66,0) 70%);
+  transform:translate(-50%,-50%);will-change:transform;
+}
 
-        body {
-            background-color: #040812;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+/* ===== NAVIGATION ===== */
+.top-nav{
+  display:flex;justify-content:center;align-items:center;padding:25px 20px;gap:30px;
+  z-index:50;position:relative;flex-wrap:wrap;
+}
+.top-nav a{
+  color:rgba(255,255,255,0.5);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.5px;
+  transition:all .3s ease;position:relative;
+}
+.top-nav a::after{
+  content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:#f5c542;
+  transition:width .35s cubic-bezier(0.16,1,0.3,1);
+}
+.top-nav a:hover,.top-nav a.active{color:#f5c542;text-shadow:0 0 10px rgba(245,197,66,0.5);}
+.top-nav a:hover::after,.top-nav a.active::after{width:100%;}
 
-        /* ===== BACKGROUND SYSTEM ===== */
-        .bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: linear-gradient(180deg, rgba(4, 8, 18, 0.85) 0%, rgba(11, 21, 40, 0.9) 100%), 
-                        url('city-bg.png') no-repeat center center;
-            background-size: cover;
-        }
+.back-button-wrapper{position:fixed;top:24px;left:28px;z-index:80;}
+.back-arrow-btn{
+  background:rgba(4,8,18,0.55);backdrop-filter:blur(12px);
+  border:1px solid rgba(245,197,66,0.25);color:#f5c542;font-size:19px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;text-decoration:none;
+  transition:all .45s cubic-bezier(0.16,1,0.3,1);
+}
+.back-arrow-btn:hover{
+  border-color:#f5c542;background:rgba(245,197,66,0.12);
+  transform:translateX(-5px);box-shadow:0 0 22px rgba(245,197,66,0.3);
+}
 
-        /* ===== NAVIGATION BAR ===== */
-        .top-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25px 20px;
-            gap: 30px;
-            z-index: 10;
-        }
+/* ===== INTRO IMAGE SEQUENCE ===== */
+.intro-stage{
+  position:fixed;inset:0;z-index:200;background:#020509;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1800px;
+}
+.intro-img-wrap{
+  position:absolute;top:0;left:0;width:100vw;height:100vh;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  will-change:transform,top,left,width,height,border-radius;
+  transition:
+    width 1.6s cubic-bezier(0.65,0,0.35,1),
+    height 1.6s cubic-bezier(0.65,0,0.35,1),
+    top 1.6s cubic-bezier(0.65,0,0.35,1),
+    left 1.6s cubic-bezier(0.65,0,0.35,1),
+    border-radius 1.3s cubic-bezier(0.65,0,0.35,1),
+    box-shadow 1.3s ease,
+    transform 1.6s cubic-bezier(0.65,0,0.35,1);
+  border-radius:0;
+}
+.intro-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.25);
+  filter:brightness(0.5) saturate(1.05);
+  opacity:0;
+  transition:opacity 1.1s ease, transform 2.2s cubic-bezier(0.16,1,0.3,1), filter 1.6s ease;
+}
+.intro-img-wrap.show img{opacity:1;transform:scale(1);filter:brightness(0.78) saturate(1.05);}
+.intro-stage.settled .intro-img-wrap img{filter:brightness(1) saturate(1);}
 
-        .top-nav a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
+.intro-sheen{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,0.22) 50%,transparent 65%);
+  transform:translateX(-140%);opacity:0;
+}
+.intro-stage.sweep .intro-sheen{animation:sheenSweep 1.15s cubic-bezier(0.16,1,0.3,1) forwards;}
+@keyframes sheenSweep{0%{opacity:1;transform:translateX(-140%);}100%{opacity:0;transform:translateX(140%);}}
 
-        .top-nav a:hover, .top-nav a.active {
-            color: #f5c542;
-            text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
-        }
+.intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%);}
 
-        /* ===== MAIN CONTAINER ===== */
-        .content-container {
-            max-width: 950px;
-            width: 100%;
-            margin: auto;
-            padding: 20px 40px 60px;
-            flex: 1;
-        }
+.intro-caption{
+  position:absolute;bottom:9%;left:50%;transform:translate(-50%,16px);text-align:center;z-index:3;
+  opacity:0;transition:opacity .9s ease, transform .9s cubic-bezier(0.16,1,0.3,1);
+}
+.intro-caption.show{opacity:1;transform:translate(-50%,0);}
+.intro-caption .line1{
+  font-family:'Playfair Display',serif;font-size:clamp(22px,3.4vw,36px);
+  color:#fff;font-weight:700;text-shadow:0 4px 30px rgba(0,0,0,0.7);
+  letter-spacing:0.3px;
+}
+.intro-caption .line2{
+  margin-top:10px;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#f5c542;
+}
 
-        /* HERO BANNER FOR AALEKH AWARD */
-        .award-hero-banner {
-            width: 100%;
-            height: 400px;
-            border-radius: 24px;
-            border: 2px solid #f5c542;
-            box-shadow: 0 0 35px rgba(245, 197, 66, 0.3);
-            overflow: hidden;
-            background-color: #0c1424;
-            margin-bottom: 30px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* placeholder reserving hero image slot in normal flow */
+.hero-image-slot{
+  width:100%;max-width:100%;height:0;opacity:0;position:relative;
+  border-radius:24px;overflow:hidden;margin-bottom:30px;
+  transition:opacity .4s ease;
+}
+.hero-image-slot.ready{opacity:1;}
+.hero-image-slot .placed-img-frame{
+  width:100%;height:100%;position:relative;border-radius:24px;overflow:hidden;
+  border:2px solid #f5c542;box-shadow:0 0 35px rgba(245,197,66,0.3);
+  background-color:#0c1424;display:flex;align-items:center;justify-content:center;
+}
+.hero-image-slot .bg-blur-layer{
+  position:absolute;inset:0;background-image:url('aalekh.png');background-size:cover;
+  background-position:center;filter:blur(20px) brightness(0.3);z-index:1;transform:scale(1.1);
+}
+.hero-image-slot img.main-award-img{
+  max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  position:relative;z-index:2;display:block;
+}
 
-        /* Smart Background Blur Layer to Fill Empty Spaces Intelligently */
-        .award-hero-banner .bg-blur-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('aalekh-award.png');
-            background-size: cover;
-            background-position: center;
-            filter: blur(20px) brightness(0.3);
-            z-index: 1;
-            transform: scale(1.1); /* Prevents edge artifacts from blur */
-        }
+/* ===== MAIN CONTAINER ===== */
+.content-container{max-width:950px;width:100%;margin:auto;padding:20px 40px 80px;flex:1;position:relative;z-index:1;}
 
-        /* Foreground Image Optimized to Fit Without Clipping */
-        .award-hero-banner img.main-award-img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            position: relative;
-            z-index: 2;
-            display: block;
-        }
+.reveal{
+  opacity:0;transform:translateY(30px);filter:blur(4px);
+  transition:opacity .9s cubic-bezier(0.16,1,0.3,1), transform .9s cubic-bezier(0.16,1,0.3,1), filter .9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.in-view{opacity:1;transform:translateY(0);filter:blur(0);}
 
-        /* ===== VERIFIED SOURCE EXTERNAL LINKS BADGES ===== */
-        .source-links-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 35px;
-        }
+/* ===== LINK CARDS (3D interactive) ===== */
+.source-links-container{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:45px;
+}
+.tilt-card{
+  position:relative;display:block;text-decoration:none;border-radius:20px;
+  padding:28px 26px;overflow:hidden;
+  background:linear-gradient(155deg, rgba(245,197,66,0.06), rgba(255,255,255,0.02));
+  border:1px solid rgba(245,197,66,0.22);
+  transform-style:preserve-3d;
+  transition:transform .12s ease-out, box-shadow .4s ease, border-color .4s ease;
+  will-change:transform;
+}
+.tilt-card::before{
+  content:'';position:absolute;inset:0;border-radius:20px;pointer-events:none;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(245,197,66,0.16), transparent 45%);
+  opacity:0;transition:opacity .4s ease;
+}
+.tilt-card:hover::before{opacity:1;}
+.tilt-card:hover{
+  box-shadow:0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(245,197,66,0.15);
+  border-color:#f5c542;
+}
+.tilt-card.youtube-card{border-color:rgba(239,68,68,0.35);}
+.tilt-card.youtube-card::before{background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(239,68,68,0.18), transparent 45%);}
+.tilt-card.youtube-card:hover{border-color:#ef4444;box-shadow:0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(239,68,68,0.18);}
 
-        .badge-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(245, 197, 66, 0.25);
-            padding: 10px 18px;
-            border-radius: 30px;
-            color: #f5c542;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+.tilt-card .tc-icon{
+  font-size:30px;color:#f5c542;margin-bottom:16px;display:block;
+  text-shadow:0 0 16px rgba(245,197,66,0.4);
+  transform:translateZ(30px);
+}
+.tilt-card.youtube-card .tc-icon{color:#ef4444;text-shadow:0 0 16px rgba(239,68,68,0.4);}
+.tilt-card .tc-title{
+  font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;
+  transform:translateZ(24px);
+}
+.tilt-card .tc-desc{
+  font-size:13.5px;color:rgba(255,255,255,0.55);font-weight:300;line-height:1.5;
+  transform:translateZ(18px);
+}
+.tilt-card .tc-arrow{
+  position:absolute;top:26px;right:26px;font-size:14px;color:rgba(255,255,255,0.35);
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1), color .4s ease;
+  transform:translateZ(20px);
+}
+.tilt-card:hover .tc-arrow{transform:translateZ(20px) translate(4px,-4px);color:#f5c542;}
+.tilt-card.youtube-card:hover .tc-arrow{color:#ef4444;}
 
-        .badge-link:hover {
-            background: rgba(245, 197, 66, 0.1);
-            border-color: #f5c542;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(245, 197, 66, 0.15);
-        }
+/* ===== TITLES ===== */
+.page-title{
+  font-family:'Playfair Display',serif;font-weight:700;line-height:1.14;
+  font-size:clamp(34px,5vw,46px);margin-bottom:10px;letter-spacing:-0.01em;
+}
+.page-title .word{
+  display:inline-block;opacity:0;filter:blur(6px);transform:translateY(26px);
+  animation:wordIn .85s cubic-bezier(0.16,1,0.3,1) forwards;
+  background:linear-gradient(135deg,#ffffff 50%,#f5c542 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+@keyframes wordIn{to{opacity:1;filter:blur(0);transform:translateY(0);}}
 
-        .badge-link i {
-            font-size: 14px;
-        }
+.gold-divider{
+  width:0;height:2px;background:#f5c542;box-shadow:0 0 8px #f5c542;margin-bottom:35px;
+  transition:width 1s cubic-bezier(0.16,1,0.3,1) .3s;
+}
+.gold-divider.grown{width:60px;}
 
-        .badge-link.youtube-badge {
-            border-color: rgba(239, 68, 68, 0.4);
-            color: #ef4444;
-        }
+/* ===== SUMMARY BOX ===== */
+.summary-box{
+  background:rgba(245,197,66,0.04);border-left:4px solid #f5c542;
+  border-top:1px solid rgba(245,197,66,0.1);border-right:1px solid rgba(245,197,66,0.1);
+  border-bottom:1px solid rgba(245,197,66,0.1);
+  padding:25px 30px;border-radius:0 16px 16px 0;margin-bottom:40px;
+  font-size:16px;line-height:1.7;color:rgba(255,255,255,0.95);backdrop-filter:blur(10px);
+}
 
-        .badge-link.youtube-badge:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: #ef4444;
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.15);
-        }
+/* ===== ESSAY ===== */
+.essay-section{display:flex;flex-direction:column;gap:35px;}
+.essay-block h2{
+  font-family:'Playfair Display',serif;font-size:26px;color:#f5c542;margin-bottom:15px;
+  font-weight:600;letter-spacing:0.3px;
+}
+.essay-block h3{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:12px;font-weight:500;}
+.essay-block p{font-size:16px;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:15px;text-align:justify;}
+.essay-list{list-style:none;padding-left:5px;display:flex;flex-direction:column;gap:12px;margin-top:15px;}
+.essay-list li{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.85);position:relative;padding-left:25px;
+  opacity:0;transform:translateX(-10px);animation:liIn .6s cubic-bezier(0.16,1,0.3,1) forwards;}
+@keyframes liIn{to{opacity:1;transform:translateX(0);}}
+.essay-list li::before{content:"•";color:#f5c542;font-size:20px;position:absolute;left:5px;top:-2px;}
+.essay-list strong{color:#fff;font-weight:600;}
+.wiki-link{color:#00b4d8;text-decoration:none;border-bottom:1px dashed rgba(0,180,216,0.4);transition:all .3s ease;font-weight:500;}
+.wiki-link:hover{color:#f5c542;border-bottom-color:#f5c542;text-shadow:0 0 8px rgba(245,197,66,0.3);}
 
-        .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 50%, #f5c542 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
+@media (max-width:768px){
+  .content-container{padding:20px 20px 40px;}
+  .page-title{font-size:32px;}
+  .essay-block h2{font-size:22px;}
+  .source-links-container{grid-template-columns:1fr;gap:14px;}
+  .cursor-glow{display:none;}
+}
 
-        .gold-divider {
-            width: 60px;
-            height: 2px;
-            background: #f5c542;
-            box-shadow: 0 0 8px #f5c542;
-            margin-bottom: 35px;
-        }
-
-        /* ===== EXECUTIVE SUMMARY BOX ===== */
-        .summary-box {
-            background: rgba(245, 197, 66, 0.04);
-            border-left: 4px solid #f5c542;
-            border-top: 1px solid rgba(245, 197, 66, 0.1);
-            border-right: 1px solid rgba(245, 197, 66, 0.1);
-            border-bottom: 1px solid rgba(245, 197, 66, 0.1);
-            padding: 25px 30px;
-            border-radius: 0 16px 16px 0;
-            margin-bottom: 40px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        /* ===== ESSAY TEXT STYLING ===== */
-        .essay-section {
-            display: flex;
-            flex-direction: column;
-            gap: 35px;
-        }
-
-        .essay-block h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            color: #f5c542;
-            margin-bottom: 15px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .essay-block h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: #ffffff;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .essay-block p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        /* LIST STRUCTURING */
-        .essay-list {
-            list-style: none;
-            padding-left: 5px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .essay-list li {
-            font-size: 16px;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.85);
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .essay-list li::before {
-            content: "•";
-            color: #f5c542;
-            font-size: 20px;
-            position: absolute;
-            left: 5px;
-            top: -2px;
-        }
-
-        .essay-list strong {
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        /* IN-TEXT LINK ANCHORS */
-        .wiki-link {
-            color: #00b4d8;
-            text-decoration: none;
-            border-bottom: 1px dashed rgba(0, 180, 216, 0.4);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .wiki-link:hover {
-            color: #f5c542;
-            border-bottom-color: #f5c542;
-            text-shadow: 0 0 8px rgba(245, 197, 66, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .content-container { padding: 20px 20px 40px; }
-            .award-hero-banner { height: 260px; }
-            .page-title { font-size: 32px; }
-            .essay-block h2 { font-size: 22px; }
-            .source-links-container { gap: 8px; }
-        }
-    </style>
+a:focus-visible,button:focus-visible{outline:2px solid #f5c542;outline-offset:3px;}
+</style>
 </head>
-<body>
+<body class="intro-active">
 
-    <div class="bg-canvas"></div>
+<div class="bg-canvas"></div>
+<div class="grain"></div>
+<div class="progress-rail" id="progressRail"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-    <nav class="top-nav">
-        <a href="index.html">Home</a>
-        <a href="index.html">About</a>
-        <a href="research.html">Research</a>
-        <a href="chess.html">Chess</a>
-        <a href="articles.html">Articles</a>
-        <a href="achievements.html" class="active">Achievements</a>
-        <a href="leadership.html">Leadership</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<!-- ============ INTRO IMAGE SEQUENCE ============ -->
+<div class="intro-stage" id="introStage">
+  <div class="intro-img-wrap" id="introImgWrap">
+    <img src="aalekh.png" alt="" id="introImg">
+    <div class="intro-sheen"></div>
+  </div>
+  <div class="intro-vignette"></div>
+  <div class="intro-caption" id="introCaption">
+    <div class="line1">Recognized. Nationally. At Fourteen.</div>
+    <div class="line2">The Aalekh Award — 2023</div>
+  </div>
+</div>
 
-    <main class="content-container">
-        
-        <header class="award-hero-banner">
-            <div class="bg-blur-layer"></div>
-            <img class="main-award-img" src="aalekh-award.png" alt="Aalekh Literature Award Ceremony Layout">
-        </header>
+<div class="back-button-wrapper">
+  <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
+</div>
 
-        <div class="source-links-container">
-            <a href="https://www.youtube.com/watch?v=IkhjX72XFAw&t=4480s" target="_blank" class="badge-link youtube-badge">
-                <i class="fa-brands fa-youtube"></i> View Live Streams [01:14:40]
-            </a>
-            <a href="https://news.globalindianschool.org/noida/namit-shastry-of-giis-noida-wins-big-at-the-aalekh-2023-by-bennett-university" target="_blank" class="badge-link">
-                <i class="fa-regular fa-newspaper"></i> GIIS Official Media Press
-            </a>
-            <a href="https://www.bennett.edu.in/aalekh/" target="_blank" class="badge-link">
-                <i class="fa-solid fa-graduation-cap"></i> Bennett Aalekh Portal
-            </a>
-        </div>
+<nav class="top-nav">
+  <a href="index.html">Home</a>
+  <a href="index.html">About</a>
+  <a href="research.html">Research</a>
+  <a href="chess.html">Chess</a>
+  <a href="articles.html">Articles</a>
+  <a href="achievements.html" class="active">Achievements</a>
+  <a href="leadership.html">Leadership</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
-        <h1 class="page-title">Honors & Achievements</h1>
-        <div class="gold-divider"></div>
+<main class="content-container">
 
-        <div class="summary-box">
-            <strong>Summary:</strong> On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, <em>The Mysterious Call</em> (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious <strong>Aalekh Award</strong> for literary excellence. The distinction was conferred by an extraordinary national panel, including <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal Nishank</a>, <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi</a>, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
-        </div>
+  <div class="hero-image-slot" id="heroSlot">
+    <div class="placed-img-frame">
+      <div class="bg-blur-layer"></div>
+      <img class="main-award-img" src="aalekh.png" alt="Aalekh Literature Award Ceremony Layout">
+    </div>
+  </div>
 
-        <section class="essay-section">
-            
-            <div class="essay-block">
-                <h2>The Mysterious Call: Architectural Narrative, Intellectual Rigor, and National Validation</h2>
-                <h3>The Genesis of a Precocious Enterprise</h3>
-                <p>At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, <em>The Mysterious Call</em>. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.</p>
-            </div>
+  <h1 class="page-title" id="pageTitle">Honors &amp; Achievements</h1>
+  <div class="gold-divider" id="goldDivider"></div>
 
-            <div class="essay-block">
-                <h2>Anatomy of the Narrative: Psychological Depth and Period Realism</h2>
-                <p>Set against the atmospheric, grit-laden backdrop of 1980s London, <em>The Mysterious Call</em> is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.</p>
-                <p>In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.</p>
-            </div>
+  <div class="source-links-container">
+    <a href="https://www.youtube.com/watch?v=IkhjX72XFAw&t=4480s" target="_blank" class="tilt-card youtube-card reveal" data-tilt>
+      <i class="fa-brands fa-youtube tc-icon"></i>
+      <div class="tc-title">Watch the Live Stream</div>
+      <div class="tc-desc">Full award ceremony recording — jump to timestamp 01:14:40</div>
+      <i class="fa-solid fa-arrow-up-right tc-arrow"></i>
+    </a>
+    <a href="https://news.globalindianschool.org/noida/namit-shastry-of-giis-noida-wins-big-at-the-aalekh-2023-by-bennett-university" target="_blank" class="tilt-card reveal" data-tilt>
+      <i class="fa-regular fa-newspaper tc-icon"></i>
+      <div class="tc-title">GIIS Official Press</div>
+      <div class="tc-desc">Official media coverage of the Aalekh 2023 win by Bennett University</div>
+      <i class="fa-solid fa-arrow-up-right tc-arrow"></i>
+    </a>
+  </div>
 
-            <div class="essay-block">
-                <h2>The Executive Crucible: From Concept to Global Distribution</h2>
-                <p>Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership:</p>
-                <ul class="essay-list">
-                    <li><strong>Rigorous Analytical Thinking:</strong> Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</li>
-                    <li><strong>Operational Discipline:</strong> Committing to months of isolation and unrelenting work, managing school curricula alongside the demanding milestones of drafting, editing, and formatting.</li>
-                    <li><strong>Resilience and Iteration:</strong> Navigating the humbling process of structural editing, systematically dismantling and reconstructing entire chapters to achieve a professional, publication-ready standard.</li>
-                    <li><strong>Strategic Execution:</strong> Overseeing the logistical technicalities of independent publishing, including cover design collaboration, metadata optimization, and distribution mechanics.</li>
-                </ul>
-                <p style="margin-top: 15px;">This process solidified an enduring truth: profound impact is not a function of age, but of execution, strategy, and the intellectual stamina to endure a rigorous creative cycle.</p>
-            </div>
+  <div class="summary-box reveal">
+    <strong>Summary:</strong> On January 19, 2023, the eve of my 14th birthday, I was awarded for my debut thriller, <em>The Mysterious Call</em> (Notion Press). Set in 1980s London, the novel masterfully explores human psychology and organized crime, demanding intense project management, discipline, and execution. This precocious milestone was honored with the prestigious <strong>Aalekh Award</strong> for literary excellence. The distinction was conferred by an extraordinary national panel, including <a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal Nishank</a>, <a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi</a>, Mr. Harjeet Khanduja, Ms. Swapna Liddle, Ms. Sutapa Basu, Mr. Ankit Jhamb, and Ms. Harshali Singh. This national validation proved that age is no barrier to intellectual leadership and impactful, high-level execution.
+  </div>
 
-            <div class="essay-block">
-                <h2>The Litmus Test: National Recognition and Imperial Validation</h2>
-                <p>The ultimate validation of this intellectual endeavor occurred when <em>The Mysterious Call</em> was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.</p>
-                <p>The gravity of this distinction was profoundly magnified by the caliber of the national leaders, policymakers, and public intellectuals who convened to confer the honor. My narrative voice and literary capability were evaluated and validated by an extraordinary panel of visionaries, including:</p>
-                <ul class="essay-list">
-                    <li><strong><a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal 'Nishank'</a></strong> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.</li>
-                    <li><strong><a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi (IPS)</a></strong> – India’s legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.</li>
-                    <li><strong>Mr. Harjeet Khanduja</strong> – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.</li>
-                    <li><strong>Ms. Swapna Liddle</strong> – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.</li>
-                    <li><strong>Ms. Sutapa Basu</strong> – Renowned educationist, poet, and recipient of The Times of India’s prestigious AutHer Award.</li>
-                    <li><strong>Mr. Ankit Jhamb</strong> – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.</li>
-                    <li><strong>Ms. Harshali Singh</strong> – Acclaimed author, judge, poet, and recipient of the National Literary Award.</li>
-                </ul>
-                <p style="margin-top: 15px;">To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.</p>
-            </div>
+  <section class="essay-section">
 
-            <div class="essay-block">
-                <h2>The Forward Horizon</h2>
-                <p>Ultimately, the journey of <em>The Mysterious Call</em> stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.</p>
-            </div>
+    <div class="essay-block reveal">
+      <h2>The Mysterious Call: Architectural Narrative, Intellectual Rigor, and National Validation</h2>
+      <h3>The Genesis of a Precocious Enterprise</h3>
+      <p>At an age when most young minds are exclusively consuming the narratives curated by others, I sought to architect my own. On January 19, 2023—the eve of my 14th birthday—I culminated an intense, self-directed intellectual pursuit: the formal recognition of my debut novel, <em>The Mysterious Call</em>. To conceptualize, execute, and bring a full-length literary work to the global marketplace at age 14 is not merely an exercise in creative writing; it represents a rare trajectory of psychological maturity, structural discipline, and entrepreneurial drive. It required transitioning from a passive student of literature to an active stakeholder in the competitive landscape of independent publishing, challenging the traditional boundaries of what an individual can achieve before even embarking on higher education.</p>
+    </div>
 
-        </section>
+    <div class="essay-block reveal">
+      <h2>Anatomy of the Narrative: Psychological Depth and Period Realism</h2>
+      <p>Set against the atmospheric, grit-laden backdrop of 1980s London, <em>The Mysterious Call</em> is a sophisticated psychological thriller that transcends standard genre tropes. The plot follows the cerebral and enigmatic detective Richard Carlsen, who is abruptly drawn into a labyrinthine conspiracy by a single, anonymous phone call directed to the seemingly innocuous Bungalow No. 9. What begins as a localized investigation quickly unspools into a macro-level examination of institutional corruption, complex human motivations, and the deeply entrenched networks of the London mafia.</p>
+      <p>In constructing this world, my objective was to explore the delicate equilibrium between morality and survival. The narrative demands that the reader navigate a hall of mirrors where every character operates under layers of deception, and every truth is compromised by hidden agendas. Crafting this required rigorous historical and cultural research to accurately capture the sociopolitical nuances of 1980s Britain—from the linguistic cadence of the era to the structural realities of law enforcement and organized crime. The resulting manuscript functions as a masterclass in tension, structural pacing, and intricate plotting, explicitly designed to challenge the analytical capacity of the reader until its final, subversive resolution.</p>
+    </div>
 
-    </main>
+    <div class="essay-block reveal">
+      <h2>The Executive Crucible: From Concept to Global Distribution</h2>
+      <p>Beyond the creative mechanics of storytelling, the publication of this novel served as my earliest venture into end-to-end project management and execution. Bringing an original manuscript from a nascent concept to a commercially distributed entity demanded a suite of competencies that directly mirror the foundational traits of visionary leadership:</p>
+      <ul class="essay-list">
+        <li><strong>Rigorous Analytical Thinking:</strong> Designing a complex, multi-layered plot structure where every clue, red herring, and character arc seamlessly aligns without narrative incongruity.</li>
+        <li><strong>Operational Discipline:</strong> Committing to months of isolation and unrelenting work, managing school curricula alongside the demanding milestones of drafting, editing, and formatting.</li>
+        <li><strong>Resilience and Iteration:</strong> Navigating the humbling process of structural editing, systematically dismantling and reconstructing entire chapters to achieve a professional, publication-ready standard.</li>
+        <li><strong>Strategic Execution:</strong> Overseeing the logistical technicalities of independent publishing, including cover design collaboration, metadata optimization, and distribution mechanics.</li>
+      </ul>
+      <p style="margin-top:15px;">This process solidified an enduring truth: profound impact is not a function of age, but of execution, strategy, and the intellectual stamina to endure a rigorous creative cycle.</p>
+    </div>
+
+    <div class="essay-block reveal">
+      <h2>The Litmus Test: National Recognition and Imperial Validation</h2>
+      <p>The ultimate validation of this intellectual endeavor occurred when <em>The Mysterious Call</em> was awarded the prestigious Aalekh Award, an honor reserved for exceptional literary merit and creative excellence. For an established author, such recognition represents a significant career milestone; for a 14-year-old debut novelist, it served as an extraordinary institutional endorsement of my capacity for high-level intellectual output.</p>
+      <p>The gravity of this distinction was profoundly magnified by the caliber of the national leaders, policymakers, and public intellectuals who convened to confer the honor. My narrative voice and literary capability were evaluated and validated by an extraordinary panel of visionaries, including:</p>
+      <ul class="essay-list">
+        <li><strong><a href="https://en.wikipedia.org/wiki/Ramesh_Pokhriyal" target="_blank" class="wiki-link">Dr. Ramesh Pokhriyal 'Nishank'</a></strong> – Former Union Education Minister of India, Member of Parliament, Former Chief Minister of Uttarakhand, and a highly celebrated author whose life work bridges public policy and literature.</li>
+        <li><strong><a href="https://en.wikipedia.org/wiki/Kiran_Bedi" target="_blank" class="wiki-link">Dr. Kiran Bedi (IPS)</a></strong> – India's legendary first woman IPS officer and Former Lieutenant Governor of Puducherry, an icon of systemic reform and fearless leadership.</li>
+        <li><strong>Mr. Harjeet Khanduja</strong> – Senior Vice President of HR at Reliance Jio, prominent author, inventor, and a leading global voice on human capital optimization.</li>
+        <li><strong>Ms. Swapna Liddle</strong> – Distinguished historian and academic, widely regarded as one of the foremost chroniclers of cultural heritage and historical narratives.</li>
+        <li><strong>Ms. Sutapa Basu</strong> – Renowned educationist, poet, and recipient of The Times of India's prestigious AutHer Award.</li>
+        <li><strong>Mr. Ankit Jhamb</strong> – Chief Learning Officer at Grant Thornton, executive strategist, and respected speaker on leadership dynamics.</li>
+        <li><strong>Ms. Harshali Singh</strong> – Acclaimed author, judge, poet, and recipient of the National Literary Award.</li>
+      </ul>
+      <p style="margin-top:15px;">To have my work critiqued, accepted, and celebrated by a cohort that shapes the educational, administrative, and cultural fabric of a nation completely recontextualized my achievement. It elevated the book from a personal creative milestone to a validated benchmark of national-level excellence.</p>
+    </div>
+
+    <div class="essay-block reveal">
+      <h2>The Forward Horizon</h2>
+      <p>Ultimately, the journey of <em>The Mysterious Call</em> stands as a definitive proof of concept for my future ambitions. It demonstrated that I possess the unique ability to master complex frameworks, articulate sophisticated ideas across diverse audiences, and execute ambitious long-term goals under pressure. I did not merely write a novel; I cultivated a distinct intellectual identity, proving that even at the earliest stages of life, one can possess the vision to innovate, the courage to execute, and the capacity to leave an indelible mark on the global intellectual landscape.</p>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+// ---- headline word split ----
+const pageTitle = document.getElementById('pageTitle');
+const titleWords = pageTitle.textContent.trim().split(' ');
+pageTitle.innerHTML = titleWords.map(w=>`<span class="word">${w}&nbsp;</span>`).join('');
+
+function playHeadline(baseDelay){
+  const spans = pageTitle.querySelectorAll('.word');
+  spans.forEach((s,i)=>{
+    s.style.animationDelay = (baseDelay + i*0.09) + 's';
+  });
+  document.getElementById('goldDivider').classList.add('grown');
+}
+
+// ---- scroll progress ----
+const rail = document.getElementById('progressRail');
+function updateProgress(){
+  const h = document.documentElement;
+  const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  rail.style.setProperty('--scrollP', scrolled + '%');
+}
+document.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+
+// ---- cursor glow ----
+const glow = document.getElementById('cursorGlow');
+let gx=0,gy=0,tx=0,ty=0;
+window.addEventListener('mousemove', e=>{tx=e.clientX; ty=e.clientY;});
+function animateGlow(){
+  gx += (tx-gx)*0.12; gy += (ty-gy)*0.12;
+  glow.style.transform = `translate(${gx}px, ${gy}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// ---- scroll reveal ----
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      el.classList.add('in-view');
+      const listItems = el.querySelectorAll('.essay-list li');
+      listItems.forEach((li,i)=>{ li.style.animationDelay = (0.1 + i*0.08) + 's'; });
+      io.unobserve(el);
+    }
+  });
+},{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+
+function startReveals(){ revealEls.forEach(el=>io.observe(el)); }
+
+// ---- 3D tilt cards ----
+document.querySelectorAll('[data-tilt]').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    const rx = (py - 0.5) * -14;
+    const ry = (px - 0.5) * 14;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    card.style.setProperty('--mx', (px*100)+'%');
+    card.style.setProperty('--my', (py*100)+'%');
+  });
+  card.addEventListener('mouseleave', ()=>{
+    card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
+  });
+});
+
+// ---- INTRO IMAGE SEQUENCE ----
+(function(){
+  const stage = document.getElementById('introStage');
+  const wrap = document.getElementById('introImgWrap');
+  const caption = document.getElementById('introCaption');
+  const heroSlot = document.getElementById('heroSlot');
+  const body = document.body;
+
+  Object.assign(wrap.style, {position:'absolute', top:'0', left:'0', width:'100vw', height:'100vh'});
+
+  setTimeout(()=>wrap.classList.add('show'), 150);
+  setTimeout(()=>stage.classList.add('sweep'), 950);
+  setTimeout(()=>caption.classList.add('show'), 1200);
+
+  setTimeout(()=>{
+    caption.classList.remove('show');
+
+    const targetHeight = Math.min(420, heroSlot.offsetWidth * 0.42);
+    heroSlot.style.height = targetHeight + 'px';
+    const rect = heroSlot.getBoundingClientRect();
+
+    requestAnimationFrame(()=>{
+      wrap.style.transform = 'rotateY(0deg)';
+      wrap.style.width = rect.width + 'px';
+      wrap.style.height = targetHeight + 'px';
+      wrap.style.top = rect.top + 'px';
+      wrap.style.left = rect.left + 'px';
+      wrap.style.borderRadius = '24px';
+      wrap.style.boxShadow = '0 0 35px rgba(245,197,66,0.3)';
+    });
+  }, 2550);
+
+  setTimeout(()=>{
+    stage.classList.add('settled');
+    heroSlot.classList.add('ready');
+    heroSlot.style.height = Math.min(420, heroSlot.offsetWidth * 0.42) + 'px';
+    stage.style.opacity = '0';
+    stage.style.transition = 'opacity 0.5s ease';
+    body.classList.remove('intro-active');
+    setTimeout(()=>{ stage.remove(); }, 550);
+
+    playHeadline(0.05);
+    startReveals();
+  }, 4100);
+
+  window.addEventListener('resize', ()=>{
+    if(heroSlot.classList.contains('ready')){
+      heroSlot.style.height = Math.min(420, heroSlot.offsetWidth * 0.42) + 'px';
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
