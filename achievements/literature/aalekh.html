@@ -49,22 +49,7 @@ body.intro-active{overflow:hidden;height:100vh;}
   transform:translate(-50%,-50%);will-change:transform;
 }
 
-/* ===== NAVIGATION ===== */
-.top-nav{
-  display:flex;justify-content:center;align-items:center;padding:25px 20px;gap:30px;
-  z-index:50;position:relative;flex-wrap:wrap;
-}
-.top-nav a{
-  color:rgba(255,255,255,0.5);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.5px;
-  transition:all .3s ease;position:relative;
-}
-.top-nav a::after{
-  content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:#f5c542;
-  transition:width .35s cubic-bezier(0.16,1,0.3,1);
-}
-.top-nav a:hover,.top-nav a.active{color:#f5c542;text-shadow:0 0 10px rgba(245,197,66,0.5);}
-.top-nav a:hover::after,.top-nav a.active::after{width:100%;}
-
+/* ===== BACK BUTTON ===== */
 .back-button-wrapper{position:fixed;top:24px;left:28px;z-index:80;}
 .back-arrow-btn{
   background:rgba(4,8,18,0.55);backdrop-filter:blur(12px);
@@ -291,17 +276,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #f5c542;outline-offset:3p
 <div class="back-button-wrapper">
   <a href="index.html" class="back-arrow-btn" aria-label="Go Back">←</a>
 </div>
-
-<nav class="top-nav">
-  <a href="index.html">Home</a>
-  <a href="index.html">About</a>
-  <a href="research.html">Research</a>
-  <a href="chess.html">Chess</a>
-  <a href="articles.html">Articles</a>
-  <a href="achievements.html" class="active">Achievements</a>
-  <a href="leadership.html">Leadership</a>
-  <a href="contact.html">Contact</a>
-</nav>
 
 <main class="content-container">
 
